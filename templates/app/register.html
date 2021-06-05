@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Register</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+
+
+ 
+</head>
+
+<body class="bg-danger">
+  <!-- Navbar -->
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header bg-gradient-pink py-6 py-lg-8 pt-lg-9">
+        <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+               <h1 class="text-white">Create an account</h1>
+              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-danger" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container mt--9 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12">
+          <div class="card bg-secondary border-0 mb-0">
+            
+            <div class="card-body px-lg-5 py-lg-5">
+              <div class="text-center text-muted mb-4">
+                <h2>Register with credentials</h2>
+              </div>
+             <form method="POST" enctype="multipart/form-data" data-ajax="false">
+               {% csrf_token %}
+                       <div class="form-row">
+                    <div class="form-group col-md-6 mb-0 ">
+                
+                     {{ form.username|as_crispy_field}}
+                     
+                  </div>
+                    <div class="form-group col-md-6 mb-0 ">
+             
+                     {{ form.email|as_crispy_field}}
+                  </div>
+                </div>
+                     <div class="form-row">
+                    <div class="form-group col-md-6 mb-0 ">
+                
+                    {{ form.password1|as_crispy_field}}
+                     
+                  </div>
+                    <div class="form-group col-md-6 mb-0 ">
+             
+                    {{ form.password2|as_crispy_field}}
+                  </div>
+                </div>
+              
+              
+             <hr> 
+             <div class="form-group col-md-24 mb-0 ">
+                
+                       {{ form.errors }}
+                            {{ form.non_field_errors }}
+                                    {{form.profile_image|as_crispy_field}}
+                     
+                  </div>
+                     
+                     {% comment %} <div class="form-group" > {% endcomment %}
+                              
+                                    {% comment %} <div method="POST" enctype="multipart/form-data" data-ajax="false" class="custom-file">
+                                      <input type="file" class="custom-file-input" id="id_profile_image" name="profile_image" value="male3.jpg">
+                                      <input type="hidden" name="initial-profile_image" value="male3.jpg" id="initial-id_profile_image">
+                                      <label class="custom-file-label" for="id_profile_image">Choose file</label>
+                                    </div> {% endcomment %}
+                      {% comment %} </div> {% endcomment %}
+                  <br>
+                  <div class="form-row">
+                   
+                    <div class="form-group col-md-6 mb-0"  >
+                    <label for="firstname">First name</label>
+                    <input type="text" class="form-control" id="firstname" name="first_name" placeholder="First name" required>
+                    
+                     
+                  </div>
+                    <div class="form-group col-md-6 mb-0">
+                    <label for="lastname">Last name</label>
+                    <input type="text" class="form-control" id="lastname" name="last_name" placeholder="Last name" required>
+                   
+                  </div>
+                </div>
+                   
+                       <div class="form-row">
+                   
+                    <div class="form-group col-md-6 mb-0 ">
+                
+                      <label for="profile_image">Birthday*</label>
+                <input class="form-control" type="date" value="1998-03-11" name="birthday" id="birthday">
+                     
+                  </div>
+                    <br>
+                    <div class="form-group col-md-6 mb-0 ">
+             
+                     {{form.bloodtype|as_crispy_field}}
+                  </div>
+                </div>
+                
+              
+                
+                 <div class="form-row">
+                  
+                <div class="form-group  col-md-6 mb-0 ">
+                 <a>Gender*</a> <br>
+                  <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M">
+                  <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"  value="F">
+                  <label class="form-check-label" for="inlineRadio2">Famale</label>
+                </div>
+              
+                </div>
+                <div class="form-group  col-md-6 mb-0 ">
+               
+                <a>Testes*</a><br>
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M">
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F">
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                </div>
+                
+              
+                <hr>
+
+                
+             {% comment %} {{form|crispy}} {% endcomment %}
+                <div class="text-center">
+                  <button type="submit" class="btn btn-danger  btn-lg btn-block rounded-pill  ">Created Account</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-6">
+              <a href="{% url 'password_reset' %}" class="text-light"><small>Forgot password?</small></a>
+            </div>
+            <div class="col-6 text-right">
+              <a href="{% url 'login' %}" class="text-light"><small>Already Have An Account?</small></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Argon Scripts -->
+  <!-- Core -->
+
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+</body>
+
+</html>

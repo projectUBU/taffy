@@ -1,0 +1,49 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+appdirs = "==1.4.4"
+certifi = "==2020.12.5"
+distlib = "==0.3.1"
+dj-database-url = "==0.5.0"
+filelock = "==3.0.12"
+gunicorn = "==20.1.0"
+pipenv = "==2020.11.15"
+psycopg2-binary = "==2.8.6"
+pytz = "==2021.1"
+six = "==1.16.0"
+sqlparse = "==0.4.1"
+virtualenv = "==20.4.6"
+virtualenv-clone = "==0.5.4"
+whitenoise = "==5.2.0"
+Django = "==2.2.7"
+django-extensions = "==3.1.3"
+django-crispy-forms = "==1.11.2"
+djangorestframework = "==3.12.4"
+openpyxl = "*"
+markdown = "*"
+django-filter = "==2.4.0"
+django-dbml = "*"
+pydotplus = "*"
+django-widget-tweaks = "==1.4.8"
+python-memcached = "==1.59"
+Pillow = "*"
+
+[dev-packages]
+autopep8 = "*"
+
+[scripts]
+s ="python manage.py runserver"
+rmdb = "bash -c 'rm -rf db.sqlite3 app/migrations/000*  blog/migrations/000* chat/migrations/000*'"
+mkm = "bash -c 'python manage.py makemigrations; python manage.py migrate'"
+loaddb = "bash -c 'python manage.py loaddb; python manage.py loadpoint;python manage.py createsuperuser;python manage.py loadmember;python manage.py runserver'"
+loadpoint = "python manage.py loadpoint"
+loadmember = "python manage.py loadmember"
+m = "python manage.py migrate"
+mk = "python manage.py makemigrations "
+super = "python manage.py createsuperuser"
+
+[requires]
+python_version = "3.9"

@@ -1,0 +1,353 @@
+
+  .bottomright {
+  position: absolute;
+  bottom: 903px;
+  right: 50px;
+  font-size: 100px;
+  margin-top:1000px;
+}
+
+.containerr {
+  position: relative;
+  max-width: 800px; /* Maximum width */
+  margin: 0 auto; /* Center it */
+}
+
+.containerr .contentt{
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.4); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  width: 100%; /* Full width */
+  height: 190px;
+  margin: 0px 50 0 -0px;
+  padding: 14px; /* Some padding */
+}  
+}
+  .profileview{
+  width: 100%;
+  height: 500px;
+  border: 5;
+  outline: 0;
+  background: #FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  object-fit: cover;
+
+  }
+
+  .viewprofile {
+ 
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 5;
+  outline: 0;
+  background: #FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  margin: -2px 0 0 -5px;
+  left: 74%;
+  object-fit: cover;
+ 
+}
+  .multi-action0 {
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 89px 0 0 -19px;
+  right: 79%;
+}
+  .multi-action {
+  display: inline-block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 378px 0 0 -19px;
+  left: 79%;
+}
+.multi-action2 {
+  display: inline-block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 300px 0 0 -19px;
+  left: 79%;
+}
+.multi-action3 {
+  display: inline-block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 229px 0 0 -19px;
+  left: 79%;
+}
+.multi-action4 {
+  display: inline-block;
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  margin: 139px 0 0 -15.6px;
+  left: 77.8%;
+}
+.action-button0 {
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 0;
+  outline: 0;
+  background: #FFFFFF;
+  font-size: 24px;
+  color: black;
+  z-index: 2;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all .3s;
+  
+}
+
+.action-button {
+  position:fixed;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 0;
+  outline: 0;
+  background: #FFFFFF;
+  font-size: 24px;
+  color: red;
+  z-index: 2;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all .3s;
+  
+}
+
+.action-button2 {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 0;
+  outline: 0;
+  background: #FCFCFC;
+  font-size: 24px;
+  color: green;
+  z-index: 2;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all .3s;
+}
+.action-button3 {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 0;
+  outline: 0;
+  background: #FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  z-index: 2;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all .3s;
+}
+.action-button4 {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 20;
+  outline: 10;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  z-index: 2;
+  transition: all .3s;
+  
+}
+
+  
+
+.label-container{
+	position:fixed;
+	bottom:48px;
+	right:105px;
+	display:table;
+	visibility: hidden;
+}
+
+.label-text{
+	color:#FFF;
+	background:rgba(51,51,51,0.5);
+	display:table-cell;
+	vertical-align:middle;
+	padding:10px;
+	border-radius:3px;
+}
+
+.label-arrow{
+	display:table-cell;
+	vertical-align:middle;
+	color:#333;
+	opacity:0.5;
+}
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	left:40px;
+	background-color:  #f3a4b5 ;
+	color:#FFFFFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+  margin: 100px 0 0 -19px;
+  left: 87%;
+
+}
+
+.my-float{
+	font-size:24px;
+	margin-top:18px;
+  right: 80%;
+  
+}
+
+.float1{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:120px;
+	background-color: #f3b3a4;
+	color:#FFFFFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+  margin: 100px 0 0 -19px;
+  left: 87%;
+
+}
+
+.my-float1{
+  color:red;
+	font-size:24px;
+	margin-top:18px;
+  right: 80%;
+  
+}
+
+.imageshake:hover {
+  animation: shake 1.05s;
+  animation-iteration-count: 5.0s;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.rounded-circle{
+  width:145px;
+	height:145px;
+	border-radius:50px;
+  object-fit: cover;
+
+}
+
+.toast {
+    transition: 0.32s all ease-in-out
+}
+
+.toast-container--fade {
+    right: 0;
+    bottom: 0
+}
+
+.toast-container--fade .toast-wrapper {
+    display: inline-block
+}
+
+.toast.fade-init {
+    opacity: 0
+}
+
+.toast.fade-show {
+    opacity: 1
+}
+
+.toast.fade-hide {
+    opacity: 0
+}
+
+/* The Close Button */
+.closesed {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.closesed:hover,
+.closesed:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+.text {
+  color: #f2f2f2;
+  font-size: 35px;
+  padding: 50px 20px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.4); /* Black background with 0.5 opacity */
+  
+}
+  input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 0px solid #f2f2f2;
+    border-radius: 8px;
+    font-size: 20px;
+    position: relative;
+    background-color: #f2f2f2;  
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+    -webkit-transition: width 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out;
+  }
+
+  input[type=text]:focus {
+    width: 100%;
+  }
+  h1 {
+  font-size: 40px;
+  }
+
+  h2 {
+    font-size: 25px;
+  }
+
+  p {
+    font-size: 22px;
+}
+

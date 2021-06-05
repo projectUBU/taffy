@@ -1,0 +1,392 @@
+
+{% load static %}
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Setting</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="{% static 'css/taffy_app/taffy-app.css' %}" type="text/css">
+</head>
+
+<body class="bg-white">
+
+
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light " style=" position: -webkit-sticky;  position: sticky; background:linear-gradient(87deg, #f3a4b5 0, #f3b4a4 100%) ; position: fixed;">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        {% comment %} <img src="{% static 'img/brand/whitetaffy.png' %}"> {% endcomment %}
+         <span style="font-size:24px"  ><i class="fas fa-user-cog"></i>&nbsp;การตั้งค่า</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="/">
+                <img src="{% static 'img/brand/redtaffy.png' %}">
+               
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+            <a href="{%url 'blog'%}" class="nav-link">
+            <i class="fas fa-pen-square"></i>
+              <span class="nav-link-inner--text">Blog's Love</span>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a href="/dm/" class="nav-link">
+            <i class="fas fa-comment-alt"></i>
+              <span class="nav-link-inner--text">Chat</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="/profile/" class="nav-link">
+             <i class="fas fa-user"></i>
+              <span class="nav-link-inner--text">Proflie</span>
+            </a>
+          </li>
+
+    
+ 
+         
+        </ul>
+       <hr class="d-lg-none" />
+
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+             <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="https://github.com/taffy63/taffy" target="_blank" data-toggle="tooltip" data-original-title="Source Code on Github">
+              <i class="fab fa-github"></i>
+              <span class="nav-link-inner--text d-lg-none">Github Source Code </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/setting/"  data-toggle="tooltip" data-original-title="การตั้งค่าการกรองเนื้อคู่">
+             <i class="fas fa-user-cog"></i>
+              <span class="nav-link-inner--text d-lg-none">การตั้งค่า</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/profile/" data-toggle="tooltip" data-original-title="การเปลี่ยนแปลงข้อมูลส่วนตัว">
+              <i class="fas fa-user-edit"></i>
+              <span class="nav-link-inner--text d-lg-none">แก้ไขโปรไพล์</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/logout/"  data-toggle="tooltip" data-original-title="ออกจากระบบ">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-link-inner--text d-lg-none">ออกจากระบบ</span>
+            </a>
+          </li>
+
+ 
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+  <!-- Main content -->
+  <div class="main-content">
+
+    <div class="header bg-gradient-pink py-8 py-lg-9  pt-lg-6">
+      
+      
+      
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+
+      
+    </div>
+    
+   <!-- Main content -->
+  <div class="main-content" id="panel">
+
+    <!-- Header -->
+ 
+    <!-- Page content -->
+     {%for i in member%}
+    <div class="container-fluid mt--9">
+      <div class="row">
+        <div class="center col-xl-8 order-xl-1">
+          <div class="card">
+                     {% if messages %}{% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+    <span class="alert-text"><strong>Success!</strong>{{ message }}</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}{% endif %}
+            <div class="card-header">
+              <div class="row align-items-center">
+                  
+                <div class="col-8">
+                  <h3 class="mb-0">Settings</h3>
+                  
+                </div>
+     
+              
+            </div>
+            <div class="card-body">
+               <form enctype="multipart/form-data" method="POST">
+                 {% csrf_token %}
+                        <div class="col-12 text-right">
+                         <button  type="submit" class="btn btn btn-default float-right"  data-keyboard="false">Changed</button>
+               
+                      </div>
+                <h6 class="heading-small text-muted mb-4">Account information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                       {{form.username|as_crispy_field}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                         {{form.email|as_crispy_field}}
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        {{form.phone_number|as_crispy_field}}
+                      </div>
+                    </div>
+                         <div class="col-lg-6">
+                      
+                    </div>
+       
+                  </div>
+                </div>
+                <hr class="my-4" />
+               <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Filter information</h6>
+                <div class="pl-lg-4">
+                
+                  <div class="row">
+           
+                {%if i.member.gender == "M" and i.member.testes == "F"  %}
+                <div class="form-group  col-md-6 mb-0 ">
+              
+               
+             <a>Testes*</a>&nbsp;&nbsp;&nbsp;&nbsp;<br> <br> 
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M">
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F" checked>
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                
+                  
+                 {%endif%}
+                   {%if i.member.gender == "F" and i.member.testes == "M"  %}
+                <div class="form-group  col-md-6 mb-0 ">
+               
+
+                <a>Testes*</a>&nbsp;&nbsp;&nbsp;&nbsp;<br> <br> 
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M" checked>
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F" >
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                
+                 
+                 {%endif%}
+                          {%if i.member.gender == "F" and i.member.testes == "F"  %}
+           
+              
+                <div class="form-group  col-md-6 mb-0 ">
+               
+                <a>Testes*</a>&nbsp;&nbsp;&nbsp;&nbsp;<br> <br> 
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M" >
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F" checked>
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                
+                  </div>
+                 {%endif%}
+                                   {%if i.member.gender == "M" and i.member.testes == "M"  %}
+                <div class="form-group  col-md-6 mb-0 ">
+               
+  
+               
+             <a>Testes*</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M" checked>
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F" >
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                
+                  
+                 {%endif%}
+                 <br> <br> <br> <br>
+                
+                    </div>
+                </div>
+                
+
+                <hr class="my-4" />
+                <!-- Description -->
+               
+                <div class="pl-lg-4">
+                  <div class="form-group">
+                    
+                          <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-block rounded-pill" role="button">Logout</a>
+                          <a href="{% url 'password_change' %}" class="btn btn-outline-danger btn-block rounded-pill" role="button">Change Password</a>
+                          <a href="#" class="btn btn-outline-dark btn-block rounded-pill" role="button"  data-toggle="modal"  data-target="#modal-notification"  data-backdrop="static" data-keyboard="false">Delete Account</a>
+                     
+                     
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+     {% endfor %}
+  </div>
+   
+    </div>
+    <div class="col-4 text-right">
+      
+                </div>
+              </div>
+
+              
+      <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+    <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-danger">
+        	
+            <div class="modal-header">
+             
+              
+                <img src="{% static 'img/brand/whitetaffy.png' %}" width=100>
+             
+  
+                {% comment %} <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6> {% endcomment %}
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+            	 <form role="form"  method="POST">
+               {% csrf_token %}
+               {{delete_form}}
+                <div class="py-3 text-center">
+                <i class="fas fa-exclamation-circle fa-3x"></i>
+                    <h4 class="heading mt-4">คูณมั่นใจหรอก!</h4>
+                    <p>หากทำกด "Delete Account" <br> Account คุณจะหายไปตลอดการณ์</p>
+                </div>
+                
+            </div>
+            
+            <div class="modal-footer">
+                <button  type="submit"  class="btn btn-white rounded-pill">Delete Account</button>
+                <button type="button" class="btn btn-link text-white ml-auto rounded-pill" data-dismiss="modal">Cancel</button>
+            </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       <div class="modal-title col-6 collapse-brand" id="exampleModalLongTitle">
+              
+                <img src="{% static 'img/brand/redtaffy.png' %}" width=100>
+             
+            </div>
+      
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form role="form"  method="POST">
+{% csrf_token %}
+  <strong><center class="h1">คูณมั่นใจหรอก!</center> <br> <center>หากทำกด "Delete Account" <br> Account คุณจะหายไปตลอดการณ์</center></strong>
+{{delete_form}}
+ 
+
+              <div class="modal-footer">
+        
+        <button  type="submit" class="btn btn-danger btn-lg rounded-pill" >Delete Account</button>
+        <button type="button" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancel</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Argon Scripts -->
+  <!-- Core -->
+
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,614 @@
+
+{% load static %}
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Blog's Love</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/taffy_app/taffy-blog.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1557232134/toasty.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ 
+ 
+</head>
+
+<body class="bg-white">
+
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light "style="position: -webkit-sticky;  position: sticky; position: fixed; background: linear-gradient(87deg, #f3a4b5 0, #f3b4a4 100%) ">
+    <div class="container">
+    {%if user.is_authenticated%}
+      <a class="navbar-brand" href="{% url 'blog'  %}">
+    {% elif user.is_anonymous %}
+    
+     <a class="navbar-brand" id="bornborn"  data-toggle="modal" data-target="#modal-notification-anonymous" data-backdrop="static" data-keyboard="false">
+     <div>คุณสามารถเลือกอ่านได้ไม่เกิน <span id="time"></span> วินาที</div>
+
+     {% endif%}
+         <span style="font-size:24px"  ><i class="fas fa-pen-square"></i>&nbsp;ประสบการณ์ความรัก</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+            
+              <a href="/">
+                <img  src="{% static 'img/brand/redtaffy.png' %}">
+               
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+            
+          </div>
+        </div>
+
+
+
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+            <a href="{% url 'member_all'  %}" class="nav-link">
+           <i class="fas fa-heart"></i>
+              <span class="nav-link-inner--text">ค้นหาคู่ของคุณ</span>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a href="/dm/" class="nav-link">
+            <i class="fas fa-comment-alt"></i>
+              <span class="nav-link-inner--text">Chat</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="/profile/" class="nav-link">
+             <i class="fas fa-user"></i>
+              <span class="nav-link-inner--text">Proflie</span>
+            </a>
+          </li>
+       
+        </ul>
+        {%endif%}
+       <hr class="d-lg-none" />
+
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+             <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="https://github.com/taffy63/taffy" target="_blank" data-toggle="tooltip" data-original-title="Source Code on Github">
+              <i class="fab fa-github"></i>
+              <span class="nav-link-inner--text d-lg-none">Github Source Code </span>
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/setting/"  data-toggle="tooltip" data-original-title="การตั้งค่าการกรองเนื้อคู่">
+             <i class="fas fa-user-cog"></i>
+              <span class="nav-link-inner--text d-lg-none">การตั้งค่า</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/profile/" data-toggle="tooltip" data-original-title="การเปลี่ยนแปลงข้อมูลส่วนตัว">
+              <i class="fas fa-user-edit"></i>
+              <span class="nav-link-inner--text d-lg-none">แก้ไขโปรไพล์</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/logout/"  data-toggle="tooltip" data-original-title="ออกจากระบบ">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-link-inner--text d-lg-none">ออกจากระบบ</span>
+            </a>
+          </li>
+ {%endif%}
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+    
+  <!-- Main content -->
+  <div class="main-content">
+  <div class="bottomright">
+
+        {% if messages %}{% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <span class="alert-icon"><i class="fas fa-bell"></i></span>
+    <span class="alert-text"><strong>Success!</strong>{{ message }}</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+    {% endfor %}
+        
+        {% endif %}
+
+  </div>
+    <div class="header bg-gradient-pink py-8 py-lg-9  pt-lg-6">
+           <div class="container">
+        <div class="header-body text-center mb-4">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-4 col-md-0 px-5">
+            
+           
+            </div>
+            
+       
+          </div>
+        </div>
+      </div>
+ 
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2490 90" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2490 0 2490 90 0 90"></polygon>
+        </svg>
+      </div>
+    </div>
+    
+     <!-- Page content -->
+    <div class="container mt--8 pb-5">
+    {% if posts.has_other_pages %}
+ <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end"> 
+  {% if posts.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.previous_page_number }}" tabindex="-1">
+        <i class="fa fa-angle-left"></i>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+   {% else %}
+   <li class="page-item disabled">
+      <a class="page-link "  tabindex="-1">
+        <i class="fa fa-angle-left"></i>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    {%endif%}
+    {% for i in posts.paginator.page_range %}
+     {% if posts.number == i %}
+    <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }} </a></li>
+     {% else %}
+    <li class="page-item  "><a class="page-link" href="?page={{ i }}">{{ i }} </a></li>
+  {% endif %}
+ {% endfor %}
+   {% if posts.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.next_page_number }}">
+        <i class="fa fa-angle-right"></i>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    {% else %}
+        <li class="page-item disabled">
+      <a class="page-link" >
+        <i class="fa fa-angle-right"></i>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+ {% endif %}
+  </ul>
+</nav>
+     {% endif %} 
+      <!-- Table -->
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-8">
+        
+        {% for post in posts%}
+
+            <div class="card-header border-0">
+              
+             
+                <div class="media mb-0">
+                  <span class="avatar avatar-sm rounded-circle "  style="width:75px;height:75px;;">
+                     <img  class="imageshake"  alt="Image placeholder" src="{{ post.author.profile_image.url }}" style="width:65px;height:65px;object-fit:cover;" >
+               
+                  </span>
+        
+                <div class="col mb-0">
+                  
+               <a  href="{% url 'member_posts' post.author.username %}"> Written by <h1 class="h3 mb-2" style="font-size:20px; font-weight:bold">{{ post.author.username }} ,{{ post.author.gender }} </h1></a>
+               <h6 class="text-uppercase text-muted ls-4 mb-1" style="font-size:15px;">{{ post.date_posted|date:"d F  h:i:s A" }}</h6>
+            
+                </div> 
+               
+                {% if post.author == user%}
+        
+                          <div class="dropdown show">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <i class="fas fa-ellipsis-v fa-2x"></i>
+                        </a> 
+                       
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" x-placement="bottom-end" style="position: absolute; transform: translate3d(-160px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
+                          <a  class="dropdown-item" href='{% url 'post_update' post.pk %}'>แก้ไขโพสต์</a>
+                          <a class="dropdown-item"  data-toggle="modal"  data-target="#modal-notification-auth{{post.id}}" >ลบโพสต์</a>
+                        </div> 
+                         
+                      </div>{% endif%}
+            </div>
+          
+            <div class="card-header bg-transparent pb-5 ">
+            
+              <div class="text-center ">
+               {% if post.image %}
+                   <img  class="imageshake img-fluid rounded" src="{{post.image.url}}" alt="">
+              {% else %}
+                  
+              {% endif %} 
+            </div>
+          
+            <div class="card-body px-lg-8 py-lg-4">
+                  <h1 style="font-weight:bold;font-size:25px;text-align:center;"><a class="article-title"  >{{ post.title|safe }}</a></h1>
+                  {%if post.content%}
+                  {% if user.is_authenticated%}
+               <a href="{% url 'post_detail' post.pk %}" class="article-content" style="font-size:15px;"  >{{ post.content|safe|truncatewords:"30"|linebreaks }}
+               <button  type="button" class="btn btn-outline-info btn-round"  >Read More...</button></a>
+                {%else%}
+          <a class="article-content" style="font-size:15px;"  >{{ post.content|safe|linebreaks }}</a>
+                {%endif %}
+
+
+
+                {% else %}
+
+                {%endif%}
+   
+            </div>
+           
+
+      <div class="text-muted text-start mt-0 mb-0">
+
+ 
+                     <div class="text-muted text-start mt-0 mb-0">
+                     {%if post.liked.count == 0 %}
+                    <small class="align-items-start btn btn-link text-danger">
+                     <i class="far fa-heart fa-2x"></i> &nbsp;<span style="font-size:15px;">ยังไม่มีใครถูกใจสิ่งนี้</span>
+                     </small>
+
+                     {% else %}
+                     <small class="align-items-start btn btn-link text-danger">
+                     <i class="fas fa-heart fa-2x"></i> &nbsp;<span style="font-size:15px;">มีสมาชิกถูกใจสิ่งนี้ {{post.liked.count}} คน</span>
+
+                    {% comment %}  <h1 id="demo"></h1> {% endcomment %}
+                     </small>
+                     {% endif%}
+
+
+          
+        </div>
+
+       
+      </div> </div>
+
+
+
+    </div>  {% endfor %} 
+
+</div>
+{% if posts.has_other_pages %}
+ <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center"> 
+  {% if posts.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.previous_page_number }}" tabindex="-1">
+        <i class="fa fa-angle-left"></i>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+   {% else %}
+   <li class="page-item disabled">
+      <a class="page-link "  tabindex="-1">
+        <i class="fa fa-angle-left"></i>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    {%endif%}
+    {% for i in posts.paginator.page_range %}
+     {% if posts.number == i %}
+    <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }} </a></li>
+     {% else %}
+    <li class="page-item  "><a class="page-link" href="?page={{ i }}">{{ i }} </a></li>
+  {% endif %}
+ {% endfor %}
+   {% if posts.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.next_page_number }}">
+        <i class="fa fa-angle-right"></i>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    {% else %}
+        <li class="page-item disabled">
+      <a class="page-link" >
+        <i class="fa fa-angle-right"></i>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+ {% endif %}
+  </ul>
+</nav>
+     {% endif %} 
+    <div class="container-fluid mt--8 ">
+    <!-- page content + floating button -->
+
+    <a href="/login/?next=/blog/"  class="float" >
+                     <i class="fas fa-sign-in-alt my-float" data-toggle="tooltip" data-original-title="เข้าสู่ระบบเพื่อสร้างโพสต์ได้ที่นี้"></i>
+                     
+                  </a>
+
+  {% if user.is_authenticated%}
+                  <a href="#"  class="float" data-toggle="modal"  data-target="#LargeModalXLS"  data-backdrop="static" data-keyboard="false">
+                     <i class="fas fa-pen my-float" data-toggle="tooltip" data-original-title="สร้างโฟสต์ของคุณได้ที่นี้"></i>
+                     
+                  </a>
+                      <a href="#"  class="float1" data-toggle="modal"  data-target="#modal-notification-search" data-backdrop="static" data-keyboard="false">
+                     <i class="fas fa-search fa-2x my-float1" data-toggle="tooltip" data-original-title="ค้นหาโพสต์ได้ที่นี้"></i>
+
+                  </a>
+        
+
+                  <div class="label-container">
+                  <div class="label-text">สร้างโพสต์ของคุณ</div>
+                  <i class="fas fa-pen"></i>
+                  </div>
+ 
+
+
+         <!-- Modal CreatePost-->
+            
+              <div class="modal fade bd-example-modal-xl" id="LargeModalXLS" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                    <div class="modal-title col-6 collapse-brand" id="exampleModalLongTitle2">
+                            
+                            <img  src="{% static 'img/brand/redtaffy.png' %}" width=100>
+                          
+                          </div>
+                    
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                     <div class="modal-body">
+
+                        <form method="POST" enctype="multipart/form-data">
+                               {% csrf_token %} 
+                               <div class="content-section">
+                                  {{ form.media }}
+                                  {{ form|crispy }}
+
+
+                                 </div> 
+                    <div class="modal-footer" style="position: sticky;bottom: 0;" >
+                          
+                              <button  type="submit"  class="btn btn-danger btn-lg btn-block rounded-pill" >โพสต์เลย</button>
+                          </div>
+                        </form>
+                          </div>        
+                                  
+                                  
+                                  
+          </div>
+        </div>
+        
+      </div>
+      
+      </div>
+
+                  
+                  
+ <!-- Modal Search-->
+ <div class="col-md-4">
+   
+    <div class="modal fade" id="modal-notification-search" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+      <div class="modal-dialog modal-pink modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-pink">
+          <div class="modal-header">
+          <img  class="modal-title" id="modal-title-notification" src="{% static 'img/brand/whitetaffy.png' %}" width=180>
+           
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="py-3 text-center">
+
+              <form>
+              <input class="form-control mr-sm-2" name="q" type="search" name="search" id="id_search" placeholder="Search.." aria-label="Search">
+             <br>
+               <input class="btn btn-outline-default my-2 my-sm-0" type="submit" value="Search">
+            </form> 
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif%}
+
+</div></div>
+<br><br><br><br>
+
+
+ <!-- Modal anonymous-->
+{% if user.is_anonymous %}
+   <div class="col-md-4">
+ 
+    <div class="modal fade" id="modal-notification-anonymous" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+      <div class="modal-dialog modal-warning modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-warning">
+          <div class="modal-header">
+            <h6 class="modal-title" id="modal-title-notification">เข้าสู่ระบบ หรือ สมัครเป็นสมาชิกเท่านั้น</h6>
+    
+          </div>
+          <div class="modal-body">
+            <div class="py-3 text-center">
+              <i class="ni ni-bell-55 ni-3x"></i>
+              <h4 class="heading mt-4">กรุณาเข้าสู่ระบบเพื่ออ่านต่อ หรือ เพื่อเลือกหาคนรู้ใจได้</h4>
+              <p style="font-size:15">คุณสามารถ เข้าสู่ระบบได้เมื่อกดที่ปุ่ม Login หรือ ลงทะเบียนได้เมื่อคุณยังไม่มีบัญชีผู้ใช้กดที่ปุ่ม Register</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="/login/?next=/blog/" ><button type="button" class="btn btn-white">Login</button></a>
+            <a href="{% url 'register'%}"button type="button" class="btn btn-white ml-auto">Register</button></a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+ <!-- Modal Delete -->
+  {%for post in posts%}
+    <div class="modal fade dialoged" style="position:fixed; overflow: auto;" id="modal-notification-auth{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="modal-notification-auth" aria-hidden="true">
+   
+      <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-danger">
+          <div class="modal-header">
+          <img  class="modal-title" id="modal-title-notification" src="{% static 'img/brand/whitetaffy.png' %}" width=150>
+           
+        
+          </div>
+          <div class="modal-body">
+            <div class="py-3 text-center">
+              <i class="fas fa-trash-alt fa-4x"></i>
+              <h4 class="heading mt-4">ลบโพสต์</h4>
+              <p>หากคุณต้องการลบประสมการณ์กดปุ่มลบโพสต์ได้เลยแล้วมันจะหายไป</p>
+            </div>
+          </div>
+         
+          <div class="modal-footer">
+            <a href="{% url 'delete_post' post.id %}"><button  type="button" class="btn btn-white">ลบโพสต์</button></a>
+            <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+   {%endfor%}
+   <script src="{% static 'vendor/nouislider/distribute/nouislider.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+  <!-- Like APT JS -->
+  <script src="{% static 'js/main.js' %}"></script>
+ 
+{% if user.is_anonymous%}
+<script >
+function startTimer(duration, display) {
+  var start = Date.now(),
+      deferred = $.Deferred(),
+      display = document.getElementById(display),
+      diff, minutes, seconds, i;
+
+  function timer() {
+    diff = duration - (((Date.now() - start) / 1000) | 0);
+
+    minutes = (diff / 60) | 0;
+    seconds = (diff % 60) | 0;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    display.textContent = minutes + ":" + seconds;
+    
+    if (diff <= 0) {
+      clearInterval(i);
+      deferred.resolve();
+    }
+  };
+
+  timer();
+  i = setInterval(timer, 1000);
+
+  return deferred.promise();
+}
+
+
+startTimer(5, 'time').then(function(){
+  
+  $('#bornborn').trigger('click'); 
+  
+});
+</script>
+{%endif%}
+ <script>
+ $( document ).on( "pageinit", function() {    	 	     
+    $( "#externalpage" ).on({
+        popupbeforeposition: function( event, ui ) {  
+            console.log( event.target );
+        }
+    });
+});
+ </script>
+ {%for post in posts%}
+  <script>
+$("#example{{post.id}}").click(function(e) {
+  
+        e.preventDefault()
+        var this_ = $(this)
+        var commentUrl = this_.attr("data-url")
+        $.ajax({
+          method:"GET",
+          url:commentUrl,
+          success: function(data){
+            //console.log(data)//
+            console.log("commentUrl")
+
+          }
+
+        })    
+});
+  </script>
+ {% endfor %}
+  {%for post in posts%}
+<script>
+            fetch('http://localhost:8000/api-blog/comment/?format=json')
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    // Work with JSON data here
+                    console.log(data.length)
+                 
+                      
+                })
+                .catch(err => {
+                    // Do something for an error here
+                    console.log(err)
+                    console.log("ERROR")
+                })
+
+        </script>
+ {% endfor %}
+         
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+
+{% load static %}
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Chat</title>
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  
+  <link rel="stylesheet" href="{% static 'css/chat_taffy/chat-taffy.css'%}" type="text/css"
+   
+      <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
+    </head>
+
+</head>
+<body>
+
+
+         
+<div id="frame">
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+     
+				<img style="width: 50px;height: 50px;object-fit: cover;" id="profile-img" src="{{request.user.profile_image.url}}"  alt="" />
+    
+				<p style="font-weight: bold">&nbsp&nbsp&nbsp&nbsp&nbsp{{ request.user.username }}</p>
+			
+			</div>
+		</div>
+
+		<div id="contacts">
+			<ul class="contact collection" id="users">
+			
+			
+	
+			
+			</ul>
+		</div> 
+   
+		<div id="bottom-bar">
+			<a href="/"><button ><i class="fa fa-heart" aria-hidden="true"></i> <span>Find's Love</span></button></a>
+			<a href="/blog/"><button ><i class="fas fa-pen-square" aria-hidden="true"></i> <span>Blog's Love</span></button></a>
+		</div>
+	</div>
+	<div class="content">
+		<div class="contact-profile">
+      {%if receiver.username%}
+			<img src="{{receiver.profile_image.url}}" alt="" />
+      <p style="font-weight: bold">{{ receiver.username }}
+      {%endif%}
+      <form id="get_id" action="" method="POST">
+			<div class="social-media">
+      	<i class="" aria-hidden="true"></i>
+				 <i class="" aria-hidden="true"></i>
+         {%if receiver.id%}
+				<a href="/dm/review/{{receiver.id}}" ><i class="fa fa-user-times" aria-hidden="true"></i></a>
+         {% endif %}
+			</div>
+		</div>
+     </form>
+    		<div class="messages" >
+     
+          {% block messages %}
+
+          {% endblock %}
+      
+  
+		</div>
+       
+		<div class="message-input">
+     <form id="chat-box" class="{% block hide %}hide{% endblock %}" method="post">
+       {% csrf_token %}
+			<div class="wrap">
+			<input  id="id_message" name="message" type="text"  placeholder="Write your message..." />
+			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+			</div>
+       </form>
+		</div>
+    
+	</div>
+</div>
+  
+  
+ 
+    <script>
+        // For receiving
+        sender_id = "{{ receiver.id }}";
+        receiver_id = "{{ request.user.id }}";
+
+        //For sending
+        $(function () {
+            scrolltoend();
+            $('#chat-box').on('submit', function (event) {
+                event.preventDefault();
+                var message = $('#id_message');
+                send('{{ request.user.username }}', '{{ receiver.username }}', message.val());
+                message.val('');
+            })
+            setInterval(() => {
+                getUsers({{ request.user.id }}, doc => {
+                    let list = ''
+                    doc.map(userItem => {
+                        list += userItem
+                    })
+                    $('#users').html(list)
+                });
+            }, 1000)
+        })        
+
+        
+    </script>
+</body></html>

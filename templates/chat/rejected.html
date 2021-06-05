@@ -1,0 +1,478 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Find's love</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/taffy_app/taffy-app.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1557232134/toasty.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="{% static 'js/review.js' %}" defer></script>
+</head>
+<style>
+.checked {
+    color: red;
+}
+
+.my-btn {
+    background-color: inherit !important;
+    border: 0 !important;
+}
+</style>
+<body class="bg-danger">
+
+
+
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light "style="position: -webkit-sticky;  position: sticky; position: fixed; background: white; )">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'chat' request.user.id object.member.id%}">
+         <span style="font-size:24px;color:red;"> <i class="fas fa-arrow-left"></i>&nbsp;ปฏิเสทและรีวิวเนื้อคู่</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      
+       <span style="color:red;" <i class="fas fa-bars"></i></span>
+         {% comment %} <span class="navbar-toggler-icon"></span> {% endcomment %}
+      </button>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="/">
+                <img src="{% static 'img/brand/redtaffy.png' %}">
+               
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+     
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        
+          <li class="nav-item">
+            <a  style="color:red;"class="nav-link nav-link-icon" href="/blog/"  data-toggle="tooltip" data-original-title="Blog's Love">
+             <i class="fas fa-pen-square"></i>
+              <span class="nav-link-inner--text d-lg-none">ประสบการณ์ความรัก</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  style="color:red;" class="nav-link nav-link-icon" href="/profile/" data-toggle="tooltip" data-original-title="การเปลี่ยนแปลงข้อมูลส่วนตัว">
+              <i class="fas fa-user-edit"></i>
+              <span class="nav-link-inner--text d-lg-none">แก้ไขโปรไพล์</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a style="color:red;" class="nav-link nav-link-icon" href="/"  data-toggle="tooltip" data-original-title="Find's Lover">
+              <i class="fas fa-heart"></i>
+              <span class="nav-link-inner--text d-lg-none">ค้นหาคู่ของคุณ</span>
+            </a>
+          </li>
+
+ 
+        </ul>
+      </div>
+    </div>
+     
+
+  </nav>
+        
+  <!-- Main content -->
+  <div class="main-content">
+  
+  <div class="bottomright">
+
+        {% if messages %}{% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <span class="alert-icon"><i class="fas fa-bell"></i></span>
+    <span class="alert-text"><strong>Success!</strong>{{ message }}</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+    {% endfor %}
+        
+        {% endif %}
+
+  </div>
+
+    <div class="header bg-gradient-white py-8 py-lg-9  pt-lg-6">
+ 
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-danger" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+    </div>
+
+    <div class="container-fluid mt--8">
+    {%if score %}
+        <div id="{{object.member.username}}{{object.member.username}}" class="w3-modal" onclick="this.style.display='none'">
+   
+                    <div class="w3-modal-content w3-animate-zoom ">
+                    <span class="close">&times;</span>
+                      <img src="{{object.member.profile_image.url}}" style="object-fit: cover; width:100%; height:650px;">
+                     
+                       <div class="text">{{object.member.username}},{{object.age}}</div>
+                    </div>
+                  </div>
+      <div class="row">
+     
+       
+    <div class="col-xl-8 order-xl-1">
+          <div class="card card-profile">
+         
+           
+            <div class="row justify-content-center">
+              <div class="col-lg-8 order-lg-1">
+                <div class="card-profile-image">
+                  <a>
+                   <center> <h3><strong>รีวิวเนื้อคู่ของคุณ &nbsp;<i class="fas fa-question-circle" data-toggle="modal"  data-target="#QuestionCenter"></i></strong></h3><center>
+                   <span id="confirm-box" ></span>
+                   <br><br>
+                    <form class="rate-form" action="" method="POST" id="{{object.id}}" name="{{request.user.id}}">
+                    {% csrf_token %}
+                    <button type="submit" class="fa fa-heart fa-3x my-btn " id="first"></button>
+                    <button type="submit" class="fa fa-heart fa-3x my-btn " id="second"></button>
+                    <button type="submit" class="fa fa-heart fa-3x my-btn" id="third"></button>
+                    <button type="submit" class="fa fa-heart fa-3x my-btn" id="fourth"></button>
+                    <button type="submit" class="fa fa-heart fa-3x my-btn" id="fifth"></button>
+                </form>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-2 pt-md-4 pb-0 pb-md-4">
+           
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col">
+          
+                </div>
+              </div>
+           
+              <div class="text-center">
+               
+                  <h5 class="h3">
+                  <p>{{request.user.username}}</p>
+            
+                 <h1><strong>vs</strong></h1> <h4 class="h2">{{object.member.username}}</h4>
+                </h5>
+                <div id="confirm-rejected"></div>
+    
+              </div>
+              
+             
+            </div>
+             
+          </div>
+          <br><br><br>
+    </div>
+       <div class="col-xl-4 order-xl-2">
+          <div class="card card-profile">
+            {% if messages %}{% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+    <span class="alert-text"><strong>Success!</strong>{{ message }}</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+   {% endfor %} {% endif %}
+            {% comment %} <img src="{% static 'img/theme/img-1-1000x600.jpg' %}" alt="Image placeholder" class="card-img-top"> {% endcomment %}
+            <div class="row justify-content-center">
+              <div class="col-lg-8 order-lg-2">
+                <div class="card-profile-image">
+                  <a>
+                    <img src="{{object.member.profile_image.url}}" class="rounded-circle" style="cursor:zoom-in;"onclick="document.getElementById('{{object.member.username}}{{object.member.username}}').style.display='block'" >
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+           
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col">
+          
+                </div>
+              </div>
+           
+              <div class="text-center">
+               <hr>
+                  <h5 class="h3">
+                  {{object.member.first_name}}  {{object.member.last_name}}
+                </h5>
+             <h5 class="h3">
+                  วัน/เดือน/ปีเกิด <span class="font-weight-light">,(อายุ)</span>
+                </h5>
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i>{{object.member.birthday|date:"d F Y"}} ,{{object.age}} ปี
+                  {% comment %} <i class="ni location_pin mr-2"></i>{{object.member.birthday.day|date:"d F Y"}}/{{object.member.birthday.month}}/{{object.member.birthday.year}} ,{{object.age}} ปี {% endcomment %}
+                </div>
+                <hr>
+                <h5 class="h3">
+                  วันประจำวันเกิด,ราศี,นักษัดร,กรู๊ปเลือด
+                </h5>
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>{{object.daysofweek}}, {{object.rasi}}, {{object.naksus}}, {{object.bloodtype}} 
+                </div>
+ <hr>
+ <h5 class="h3">
+                  รสนิยม,เพศสภาพ 
+                </h5>
+                {%if object.member.gender == "M" and object.member.testes == "F"  %}
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>หญิง,ชาย
+                </div>
+                   {% endif %}
+                {%if object.member.gender == "F" and object.member.testes == "M"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย, หญิง
+                </div>
+                {% endif %}
+                  {%if object.member.gender == "M" and object.member.testes == "M"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย,ชาย
+                </div>
+                {% endif %}
+                    {%if object.member.gender == "F" and object.member.testes == "F"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย,ชาย
+                </div>
+                {% endif %}
+             
+                
+               
+              </div>
+              
+             
+            </div>
+          </div>
+{% endif %}
+
+{%if text %}
+
+   <div id="{{object.member.username}}{{object.member.username}}" class="w3-modal" onclick="this.style.display='none'">
+   
+                    <div class="w3-modal-content w3-animate-zoom ">
+                    <span class="close">&times;</span>
+                      <img src="{{object.member.profile_image.url}}" style="object-fit: cover; width:100%; height:650px;">
+                     
+                       <div class="text">{{object.member.username}},{{object.age}}</div>
+                    </div>
+                  </div>
+      <div class="row">
+     
+       
+    <div class="col-xl-8 order-xl-1">
+          <div class="card card-profile">
+         
+           
+            <div class="row justify-content-center">
+              <div class="col-lg-8 order-lg-1">
+                <div class="card-profile-image">
+                  <a>
+                   <center> <h3><strong>{{text}} &nbsp;<i class="fas fa-question-circle" data-toggle="modal"  data-target="#QuestionCenter"></i></strong></h3><center>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-2 pt-md-4 pb-0 pb-md-4">
+           
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col">
+          
+                </div>
+              </div>
+           
+              <div class="text-center">
+               
+                  <h5 class="h3">
+                  <p>{{request.user.username}}</p>
+            
+                 <h1><strong>vs</strong></h1> <h4 class="h2">{{object.member.username}}</h4>
+                </h5>
+                <div id="confirm-rejected"></div>
+    
+              </div>
+              
+             
+            </div>
+             
+          </div>
+          <br><br><br>
+    </div>
+       <div class="col-xl-4 order-xl-2">
+          <div class="card card-profile">
+            {% if messages %}{% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+    <span class="alert-text"><strong>Success!</strong>{{ message }}</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+   {% endfor %} {% endif %}
+            {% comment %} <img src="{% static 'img/theme/img-1-1000x600.jpg' %}" alt="Image placeholder" class="card-img-top"> {% endcomment %}
+            <div class="row justify-content-center">
+              <div class="col-lg-8 order-lg-2">
+                <div class="card-profile-image">
+                  <a>
+                    <img src="{{object.member.profile_image.url}}" class="rounded-circle" style="cursor:zoom-in;"onclick="document.getElementById('{{object.member.username}}{{object.member.username}}').style.display='block'" >
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+           
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col">
+          
+                </div>
+              </div>
+           
+              <div class="text-center">
+               <hr>
+                  <h5 class="h3">
+                  {{object.member.first_name}}  {{object.member.last_name}}
+                </h5>
+             <h5 class="h3">
+                  วัน/เดือน/ปีเกิด <span class="font-weight-light">,(อายุ)</span>
+                </h5>
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i>{{object.member.birthday|date:"d F Y"}} ,{{object.age}} ปี
+                  {% comment %} <i class="ni location_pin mr-2"></i>{{object.member.birthday.day|date:"d F Y"}}/{{object.member.birthday.month}}/{{object.member.birthday.year}} ,{{object.age}} ปี {% endcomment %}
+                </div>
+                <hr>
+                <h5 class="h3">
+                  วันประจำวันเกิด,ราศี,นักษัดร,กรู๊ปเลือด
+                </h5>
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>{{object.daysofweek}}, {{object.rasi}}, {{object.naksus}}, {{object.bloodtype}} 
+                </div>
+ <hr>
+ <h5 class="h3">
+                  รสนิยม,เพศสภาพ 
+                </h5>
+                {%if object.member.gender == "M" and object.member.testes == "F"  %}
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>หญิง,ชาย
+                </div>
+                   {% endif %}
+                {%if object.member.gender == "F" and object.member.testes == "M"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย, หญิง
+                </div>
+                {% endif %}
+                  {%if object.member.gender == "M" and object.member.testes == "M"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย,ชาย
+                </div>
+                {% endif %}
+                    {%if object.member.gender == "F" and object.member.testes == "F"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย,ชาย
+                </div>
+                {% endif %}
+             
+                
+               
+              </div>
+              
+             
+            </div>
+          </div>
+{%endif%}
+          
+        </div>
+      
+      </div>
+   <!-- Modal -->
+    <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+      <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-danger">
+          <div class="modal-header">
+            <h6 class="modal-title" id="modal-title-notification">คุณมั่นใจหรอว่าจะปฏิเสท <strong>{{object.member.username}}</strong></h6>   
+           
+          </div>
+          <div class="modal-body">
+            <div class="py-3 text-center">
+              <i class="ni ni-bell-55 ni-3x"></i>
+           
+              <p>ความเหมาะสมของคุณ กับ <center><br><h2 style=color:white;""> <strong>{{object.member.username}} "{{score.rating}}" คะแนน</strong></h2></center><br>  <p>คุณจะปฏิเสทได้ลงคอ???</p></p>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <form method="POST" action="{% url 'del_rejected' object.member.id%}">
+              {% csrf_token %}
+            <button type="submit" class="btn btn-white" >ปฏิเสท {{object.member.username}}</button>
+            </form>
+            <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+                              <div class="modal fade" id="QuestionCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                    <div class="modal-title col-8 collapse-brand" id="exampleModalLongTitle">
+                                          <i class="fa fa-question-circle" aria-hidden="true">รีวิวเนื้อคู่ของคุณ คือ </i>
+                                          </div>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                <p style="font-weight:bold;font-size:18px">คุณสามารถรีวิวเนื้อคู่ของคุณได้เสมอ ไม่จำต้องปฏิเสทเนื้อคู่ของคุณก็ได้ โดยคะแนนรีวิว นั้นถูกเก็บคะแนนไปคำนวณให้กับ {{object.member.username}} แค่ครั้งแรกของการกดเท่านั้น ถ้ากดเปลี่ยนคะแนนหรือ กดเป็นครั้งที่สองหรือมากกว่านั้นระบบจะทำการ Updated คะแนนให้ แต่จะไม่ไปคำนวนในครั้งนี้ จะไปคำนวนในครั้งถัดไปเมื่อมีคนอื่นมีรีวิว </p>
+                                    <center> <h2 style="font-weight:bold;font-size:18px;color:red;">โปรดระวังในการรีวิวเพราะคะแนนนั้นส่งต่อ {{object.member.username}} ทั้งระบบ</h2></center>                                      
+                                    
+                                  </div>
+                                </div>
+                              </div>
+
+     
+    
+
+   <script src="{% static 'vendor/nouislider/distribute/nouislider.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+ 
+
+
+</body>
+
+</html>

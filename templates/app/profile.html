@@ -1,0 +1,466 @@
+
+{% load static %}
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Profile</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/taffy_app/taffy-app.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+ 
+</head>
+
+<body class="bg-white">
+
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light "style=" position: -webkit-sticky;  position: sticky; background:linear-gradient(87deg, #f3a4b5 0, #f3b4a4 100%) ; position: fixed;">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        {% comment %} <img src="{% static 'img/brand/whitetaffy.png' %}"> {% endcomment %}
+         <span style="font-size:24px"  ><i class="fas fa-user"></i>&nbsp;โปรไฟล์ของคุณ</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="/">
+                <img src="{% static 'img/brand/redtaffy.png' %}" >
+               
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+            <a href="{%url 'blog'%}" class="nav-link">
+            <i class="fas fa-pen-square"></i>
+              <span class="nav-link-inner--text">Blog's Love</span>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a href="/dm/" class="nav-link">
+            <i class="fas fa-comment-alt"></i>
+              <span class="nav-link-inner--text">Chat</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="/profile/" class="nav-link">
+             <i class="fas fa-user"></i>
+              <span class="nav-link-inner--text">Proflie</span>
+            </a>
+          </li>
+
+    
+ 
+         
+        </ul>
+       <hr class="d-lg-none" />
+
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+             <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="https://github.com/taffy63/taffy" target="_blank" data-toggle="tooltip" data-original-title="Source Code on Github">
+              <i class="fab fa-github"></i>
+              <span class="nav-link-inner--text d-lg-none">Github Source Code </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/setting/"  data-toggle="tooltip" data-original-title="การตั้งค่าการกรองเนื้อคู่">
+             <i class="fas fa-user-cog"></i>
+              <span class="nav-link-inner--text d-lg-none">การตั้งค่า</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/profile/" data-toggle="tooltip" data-original-title="การเปลี่ยนแปลงข้อมูลส่วนตัว">
+              <i class="fas fa-user-edit"></i>
+              <span class="nav-link-inner--text d-lg-none">แก้ไขโปรไพล์</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/logout/"  data-toggle="tooltip" data-original-title="ออกจากระบบ">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-link-inner--text d-lg-none">ออกจากระบบ</span>
+            </a>
+          </li>
+
+ 
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+  <!-- Main content -->
+  <div class="main-content">
+
+    <div class="header bg-gradient-pink py-8 py-lg-9  pt-lg-6">
+      
+      
+      
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+
+      
+    </div>
+    
+   <!-- Main content -->
+  <div class="main-content" id="panel">
+
+    <!-- Header -->
+ 
+    <!-- Page content -->
+     {%for i in member%}
+    <div class="container-fluid mt--9">
+        <div id="{{i.member.username}}{{i.member.username}}2" class="w3-modal" onclick="this.style.display='none'">
+   
+                    <div class="w3-modal-content w3-animate-zoom ">
+                    <span class="close">&times;</span>
+                      <img src="{{i.member.profile_image.url}}" style="object-fit: cover; width:100%; height:650px;">
+                       <div class="text">{{i.member.username}},{{i.age}}</div>
+                    </div>
+                  </div>
+      <div class="row">
+        <div class="col-xl-4 order-xl-1">
+          <div class="card card-profile">
+            <img src="{% static 'img/theme/img-1-1000x600.jpg' %}" alt="Image placeholder" class="card-img-top">
+            <div class="row justify-content-center">
+              <div class="col-lg-8 order-lg-2">
+                <div class="card-profile-image">
+                  <a>
+                    <img src="{{i.member.profile_image.url}}" class="rounded-circle" style="cursor:zoom-in;"onclick="document.getElementById('{{i.member.username}}{{i.member.username}}2').style.display='block'" >
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                
+                <a href="/setting/" class="btn  btn-default">การตั้งค่า</a>
+                <a href="{%url 'member_posts' i.member.username%}" class="btn  btn-info  mr-4 ">โพสต์ของคุณ</a>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col">
+          
+                </div>
+              </div>
+             
+              <div class="text-center">
+           
+                <h5 class="h3">
+                  {{i.member.first_name}}  {{i.member.last_name}}
+                </h5>
+                 <hr>
+             <h5 class="h3">
+                  วัน/เดือน/ปีเกิด <span class="font-weight-light">,(อายุ)</span>
+                </h5>
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i>{{i.member.birthday|date:"d F Y"}} ,{{i.age}} ปี
+                  {% comment %} <i class="ni location_pin mr-2"></i>{{i.member.birthday.day|date:"d F Y"}}/{{i.member.birthday.month}}/{{i.member.birthday.year}} ,{{i.age}} ปี {% endcomment %}
+                </div>
+                <hr>
+                <h5 class="h3">
+                  วันประจำวันเกิด,ราศี,นักษัดร,กรู๊ปเลือด
+                </h5>
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>{{i.daysofweek}}, {{i.rasi}}, {{i.naksus}}, {{i.bloodtype}} 
+                </div>
+ <hr>
+ <h5 class="h3">
+                  รสนิยม,เพศสภาพ 
+                </h5>
+                {%if i.member.gender == "M" and i.member.testes == "F"  %}
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>หญิง,ชาย
+                </div>
+                   {% endif %}
+                {%if i.member.gender == "F" and i.member.testes == "M"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย, หญิง
+                </div>
+                {% endif %}
+                  {%if i.member.gender == "M" and i.member.testes == "M"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย,ชาย
+                </div>
+                {% endif %}
+                    {%if i.member.gender == "F" and i.member.testes == "F"  %}
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> ชาย,ชาย
+                </div>
+                {% endif %}
+             
+                
+               
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-8 order-xl-2">
+          <div class="card">
+          
+                 {% if messages %}{% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+    <span class="alert-text"><strong>Success!</strong>{{ message }}</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+   {% endfor %} {% endif %}
+            <div class="card-header">
+              <div class="row align-items-center">
+                  
+                <div class="col-8">
+                  <h3 class="mb-0">Edit profile </h3>
+                  
+                </div>
+
+              
+            </div>
+            <div class="card-body">
+               <form enctype="multipart/form-data" method="POST">
+                 {% csrf_token %}
+                        <div class="col-12 text-right">
+                         <button  type="submit" class="btn btn btn-default float-right" >Updated</button>
+               
+                      </div>
+                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                       {{form.first_name|as_crispy_field}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                         {{form.last_name|as_crispy_field}}
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        {{form.birthday|as_crispy_field}}
+                        
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                         {{form.bloodtype|as_crispy_field}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+               <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Profile information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group col-md-6 mb-2 ">
+                       {{form.profile_image|as_crispy_field}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+           <br>
+                {%if i.member.gender == "M" and i.member.testes == "F"  %}
+                <div class="form-group  col-md-6 mb-2 ">
+               
+                 <a>Gender*</a> <br>
+                  <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M" checked>
+                  <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"  value="F">
+                  <label class="form-check-label" for="inlineRadio2">Famale</label>
+                </div>
+          
+                </div>
+           
+              
+                <div class="form-group  col-md-6 mb-2 ">
+              
+                <a>Testes*</a><br>
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M">
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F" checked>
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                
+                  </div>
+                 {%endif%}
+                 
+                   {%if i.member.gender == "F" and i.member.testes == "M"  %}
+                <div class="form-group  col-md-6 mb-2 ">
+               
+                 <a>Gender*</a> <br>
+                  <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M" >
+                  <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"  value="F" checked>
+                  <label class="form-check-label" for="inlineRadio2">Famale</label>
+                </div>
+          
+                </div>
+           
+              
+                <div class="form-group  col-md-6 mb-2 ">
+               
+                <a>Testes*</a><br>
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M" checked>
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F" >
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                
+                  </div>
+                 {%endif%}
+                
+                          {%if i.member.gender == "F" and i.member.testes == "F"  %}
+                <div class="form-group  col-md-6 mb-2 ">
+               
+                 <a>Gender*</a> <br>
+                  <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M" >
+                  <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"  value="F" checked>
+                  <label class="form-check-label" for="inlineRadio2">Famale</label>
+                </div>
+          
+                </div>
+           
+              
+                <div class="form-group  col-md-6 mb-2 ">
+               
+                <a>Testes*</a><br>
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M" >
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F" checked>
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                
+                  </div>
+                 {%endif%}
+                
+                                   {%if i.member.gender == "M" and i.member.testes == "M"  %}
+                <div class="form-group  col-md-6 mb-2 ">
+               
+                 <a>Gender*</a> <br>
+                  <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="M" checked>
+                  <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"  value="F" >
+                  <label class="form-check-label" for="inlineRadio2">Famale</label>
+                </div>
+          
+                </div>
+           
+             
+                <div class="form-group  col-md-6 mb-2 ">
+               
+                <a>Testes*</a><br>
+       <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio11" value="M" checked>
+                  <label class="form-check-label" for="inlineRadio11">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="testes" id="inlineRadio22"  value="F" >
+                  <label class="form-check-label" for="inlineRadio22">Famale</label>
+                </div>
+                </div>
+                
+                  </div>
+                 {%endif%}
+                 
+                </div>
+
+                <hr class="my-4" />
+                <!-- Description -->
+                <h6 class="heading-small text-muted mb-4">Descriptions</h6>
+                <div class="pl-lg-4">
+                  <div class="form-group">
+                   {{form.description|as_crispy_field}}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+     {% endfor %}
+     
+  </div>
+   
+    </div>
+
+
+
+  <!-- Argon Scripts -->
+  <!-- Core -->
+
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Find's love</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1557232134/toasty.css" rel="stylesheet" />
+
+  <style>
+
+.top {
+    background-color: #eee;
+    padding: 10px;
+    padding-left: 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px
+}
+
+.bottom {
+    padding: 10px;
+    background-color: #fff;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px
+}
+
+.image {
+    position: relative
+}
+
+.image .type {
+    position: absolute;
+    left: 49px;
+    bottom: 0;
+    background: #fff;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%
+}
+
+.line-height {
+    line-height: 20px
+}
+
+.live {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: green;
+    margin-left: 1px;
+    display: flex;
+    margin-right: 5px
+}
+
+.l-now {
+    font-size: 12px
+}
+
+.dots {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: blue;
+    margin-left: 1px;
+    display: flex;
+    margin-right: 5px
+}
+  </style>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body class="bg-danger">
+
+
+
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light "style="position: -webkit-sticky;  position: sticky; position: fixed; background: )">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        {% comment %} <img src="{% static 'img/brand/whitetaffy.png' %}"> {% endcomment %}
+         <span style="font-size:24px;color:red;"> <i class="fas fa-comment-alt"></i>&nbsp;สนทนา</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      
+       <span style="color:red;" <i class="fas fa-bars"></i></span>
+         {% comment %} <span class="navbar-toggler-icon"></span> {% endcomment %}
+      </button>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="/">
+                <img src="{% static 'img/brand/redtaffy.png' %}">
+               
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+     
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        
+          <li class="nav-item">
+            <a  style="color:red;"class="nav-link nav-link-icon" href="/blog/"  data-toggle="tooltip" data-original-title="Blog's Love">
+             <i class="fas fa-pen-square"></i>
+              <span class="nav-link-inner--text d-lg-none">ประสบการณ์ความรัก</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  style="color:red;" class="nav-link nav-link-icon" href="/profile/" data-toggle="tooltip" data-original-title="การเปลี่ยนแปลงข้อมูลส่วนตัว">
+              <i class="fas fa-user-edit"></i>
+              <span class="nav-link-inner--text d-lg-none">แก้ไขโปรไพล์</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a style="color:red;" class="nav-link nav-link-icon" href="/"  data-toggle="tooltip" data-original-title="Find's Lover">
+              <i class="fas fa-heart"></i>
+              <span class="nav-link-inner--text d-lg-none">ค้นหาคู่ของคุณ</span>
+            </a>
+          </li>
+
+ 
+        </ul>
+      </div>
+    </div>
+     
+
+  </nav>
+        
+  <!-- Main content -->
+  <div class="main-content">
+
+   <!-- Main content -->
+  <div class="main-content">
+
+  
+  <div class="bottomright">
+
+        {% if messages %}{% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <span class="alert-icon"><i class="fas fa-bell"></i></span>
+    <span class="alert-text"><strong>Success!</strong>{{ message }}</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+    {% endfor %}
+        
+        {% endif %}
+
+  </div>
+
+    <div class="header bg-gradient-white py-8 py-lg-9  pt-lg-6">
+ 
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-danger" points="2560 0 2560 100 0 100"></polygon>
+        </svg>
+      </div>
+    </div>
+    
+
+    <div class="container-fluid mt--8">
+       
+   
+    <div class="card">
+        <div class="top">
+            <h4 class="mt-2">Matcher of you</h4>
+        </div>
+        <div class="bottom">
+        <a href="#1"  data-toggle="modal"  data-target="#exampleModalCenter"  data-backdrop="static" data-keyboard="false">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="image"> <img src="https://i.imgur.com/jhsYqVT.png" width="70"> <span class="type"><img src="https://i.imgur.com/4lg6mOg.png" width="20"></span> </div>
+                    <div class="d-flex flex-column line-height ml-2"> <span class="font-weight-bold">hannahdat21</span> <span>Can i order online?</span> <span class="d-flex flex-row align-items-center l-now"><small class="live"></small>Live now</span> </div>
+                </div> <span class="dots"> </span>
+            </div>
+            </a>
+            <a href="#2">
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="image"> <img src="https://i.imgur.com/vxEWOFl.png" width="70"> <span class="type"><img src="https://i.imgur.com/CngJIFw.png" width="20"></span> </div>
+                    <div class="d-flex flex-column line-height ml-2"> <span class="font-weight-bold">hannahdat21</span> <span>Is this still available?</span> <span class="d-flex flex-row align-items-center l-now"><small class="live"></small>Live now</span> </div>
+                </div> <span class="dots"> </span>
+            </div>
+             </a>
+              <a href="#3">
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="image"> <img src="https://i.imgur.com/jhsYqVT.png" width="70"> <span class="type"><img src="https://i.imgur.com/4lg6mOg.png" width="20"></span> </div>
+                    <div class="d-flex flex-column line-height ml-2"> <span class="font-weight-bold">hannahdat21</span> <span>Thanks hannah!</span> <span class="d-flex flex-row align-items-center l-now"><small class="live"></small>Live now</span> </div>
+                </div> <span class="dots"> </span>
+            </div>
+             </a>
+        </div>
+    </div>
+
+
+        </div>
+      </div>
+   <!-- Modal -->
+              <div class="modal fade bd-example-modal-xl" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                    <div class="modal-title col-6 collapse-brand" id="exampleModalLongTitle">
+                            
+                              <img src="{% static 'img/brand/redtaffy.png' %}" width=100>
+                          
+                          </div>
+                    
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                     <div class="modal-body">
+                       
+                          
+                            <div class="modal-footer">
+                          
+                          <button  type="submit"  class="btn btn-danger btn-lg btn-block rounded-pill" value="Go Filter" >กรองเนื้อคู่ของคุณ</button>
+                        </div>
+
+              
+                        </div>
+                      </div>
+                    </div>
+
+     
+    
+
+   <script src="{% static 'vendor/nouislider/distribute/nouislider.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,381 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Blog's Love Member Blog</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="{% static 'css/taffy_app/taffy-app.css' %}" type="text/css">
+ 
+</head>
+
+<body class="bg-white">
+
+   <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light "style="position: -webkit-sticky;  position: sticky; position: fixed; background: linear-gradient(87deg, #f3a4b5 0, #f3b4a4 100%) ">
+    <div class="container">
+    {%if user.is_authenticated%}
+      <a class="navbar-brand" href="{% url 'blog'  %}">
+    {% elif user.is_anonymous %}
+    
+     <a class="navbar-brand" id="bornborn"  data-toggle="modal" data-target="#modal-notification-anonymous" data-backdrop="static" data-keyboard="false">
+     <div>คุณสามารถเลือกอ่านได้ไม่เกิน <span id="time"></span> วินาที</div>
+
+     {% endif%}
+         <span style="font-size:24px"  ><i class="fas fa-arrow-left"></i>&nbsp;ดูโพสต์ของ {{member.username}}</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="/">
+                <img src="{% static 'img/brand/redtaffy.png' %}" >
+               
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+     
+       
+
+         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+             
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="{% url 'member_all'  %}"  data-toggle="tooltip" data-original-title="ค้นหาคู่ของคุณ">
+              <i class="fas fa-heart"></i>
+              <span class="nav-link-inner--text d-lg-none">ค้นหาคู่ของคุณ</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/dm/" data-toggle="tooltip" data-original-title="สนทนา">
+            <i class="fas fa-comment-alt"></i>
+              <span class="nav-link-inner--text d-lg-none">สนทนา</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/profile/"  data-toggle="tooltip" data-original-title="แก้ไขโปรไพล์">
+               <i class="fas fa-user"></i>
+              <span class="nav-link-inner--text d-lg-none">แก้ไขโปรไพล์</span>
+            </a>
+          </li>
+ {%endif%}
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+  <!-- Main content -->
+  <div class="main-content">
+<!-- Header -->
+    <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url({{member.profile_image.url}}); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white">Hi,I'm {{member.username}}</h1>
+            <p class="text-white mt-0 mb-5">หน้าเล่าเรื่องหรือการเขียน Blog ประสบการณ์ความรัก ของ {{member.username}}</p>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col-xl-4 order-xl-2">
+          <div class="card card-profile">
+          
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a href="#">
+                    <img src="{{member.profile_image.url}}" class="rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-2">
+              <div class="d-flex justify-content-between">
+         
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center">
+                    <div>
+                    {% if posts.like.count == 0%}
+                      <span class="heading">0</span>
+                      {%else%}
+                       <span class="heading">{{posts.count}}</span>
+                    {%endif%}
+                      <span class="description">จำนวนโพสต์</span>
+                    </div>
+                    <div>
+                     
+                    </div>
+                    <div>
+                    {%if comments.count == 0%}
+                      <span class="heading">0</span>
+                    {%else%}
+                      <span class="heading">{{comments.count}}</span>
+                    {%endif%}
+                      <span class="description">การแสดงความคิดเห็น</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h5 class="h3">
+                  {{member.first_name}} {{member.last_name}}
+                </h5>
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>(Birthday) {{member.birthday|date}}
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">โพสต์ทั้งหมดของ {{member.username}}</h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="{% url 'blog'%}" class="btn btn-sm btn-primary">CreatedPost</a>
+                </div>
+              </div>
+            </div>
+            <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">โพสต์ทั้งหมด</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">โพสต์ที่แสดงความคิดเห็นทั้งหมด</a>
+  
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+   {%for post in posts%}
+            <div class="card-body">
+                <div class="media mb-0">
+                  <span class="avatar avatar-sm rounded-circle "  style="width:75px;height:75px;;">
+                     <img  class="imageshake"  alt="Image placeholder" src="{{ post.author.profile_image.url }}" style="width:65px;height:65px;object-fit:cover;" >
+               
+                  </span>
+        
+                <div class="col mb-0">
+                  
+               <a  href="{% url 'member_posts' post.author.username %}"> Written by <h1 class="h3 mb-2" style="font-size:20px; font-weight:bold">{{ post.author.username }} ,{{ post.author.gender }} </h1></a>
+               <h6 class="text-uppercase text-muted ls-4 mb-1" style="font-size:15px;">{{ post.date_posted|date:"d F  h:i:s A" }}</h6>
+            
+                </div> 
+               
+                {% if post.author == user%}
+        
+                          <div class="dropdown show">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <i class="fas fa-ellipsis-v fa-2x"></i>
+                        </a> 
+                       
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" x-placement="bottom-end" style="position: absolute; transform: translate3d(-160px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
+                          <a  class="dropdown-item" href='{% url 'post_update' post.pk %}'>แก้ไขโพสต์</a>
+                          <a class="dropdown-item"  data-toggle="modal"  data-target="#modal-notification-auth{{post.id}}" >ลบโพสต์</a>
+                        </div> 
+                         
+                      </div>{% endif%}
+            </div>
+          
+            <div class="card-header bg-transparent pb-5 ">
+            
+              <div class="text-center ">
+               {% if post.image %}
+                   <img  class="imageshake img-fluid rounded" src="{{post.image.url}}" alt="">
+              {% else %}
+                  
+              {% endif %} 
+            </div>
+          
+            <div class="card-body px-lg-8 py-lg-4">
+                  <h1 style="font-weight:bold;font-size:25px;text-align:center;"><a class="article-title"  >{{ post.title|safe }}</a></h1>
+                  {%if post.content%}
+                  {% if user.is_authenticated%}
+               <a href="{% url 'post_detail' post.pk %}" lass="article-content" style="font-size:15px;"  >{{ post.content|safe|linebreaks }}</a>
+                {%else%}
+          <a class="article-content" style="font-size:15px;"  >{{ post.content|safe|linebreaks }}</a>
+                {%endif %}
+
+
+
+                {% else %}
+
+                {%endif%}
+   
+            </div>
+            {% if user.is_authenticated %}
+
+      <div class="text-muted text-start mt-0 mb-0">
+
+ 
+                     <div class="text-muted text-start mt-0 mb-0">
+                     {%if post.liked.count == 0 %}
+                    <small class="align-items-start btn btn-link text-danger">
+                     <i class="far fa-heart fa-2x"></i> &nbsp;<span style="font-size:15px;">ยังไม่มีใครถูกใจสิ่งนี้</span>
+                     </small>
+
+                     {% else %}
+                     <small class="align-items-start btn btn-link text-danger">
+                     <i class="fas fa-heart fa-2x"></i> &nbsp;<span style="font-size:15px;">มีสมาชิกถูกใจสิ่งนี้ {{post.liked.count}} คน</span>
+                     </small>
+                     {% endif%}
+
+
+          {% endif %}
+        </div>
+
+       
+      </div> </div>
+            </div>
+            {%endfor%}
+  
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+{%for comment in comments%}
+            <div class="card-body">
+                <div class="media mb-0">
+                  <span class="avatar avatar-sm rounded-circle "  style="width:75px;height:75px;;">
+                     <img  class="imageshake"  alt="Image placeholder" src="{{ comment.post.author.profile_image.url }}" style="width:65px;height:65px;object-fit:cover;" >
+               
+                  </span>
+        
+                <div class="col mb-0">
+                  
+               <a  href="{% url 'member_posts' comment.post.author.username %}"> Written by <h1 class="h3 mb-2" style="font-size:20px; font-weight:bold">{{ comment.post.author.username }} ,{{ comment.post.author.gender }} </h1></a>
+               <h6 class="text-uppercase text-muted ls-4 mb-1" style="font-size:15px;">{{ comment.post.date_commented|date:"d F  h:i:s A" }}</h6>
+            
+                </div> 
+               
+                {% if comment.author == user%}
+        
+                          <div class="dropdown show">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <i class="fas fa-ellipsis-v fa-2x"></i>
+                        </a> 
+                       
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" x-placement="bottom-end" style="position: absolute; transform: translate3d(-160px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
+                          <a  class="dropdown-item" href='{% url 'post_update' comment.post.pk %}'>แก้ไขโพสต์</a>
+                          <a class="dropdown-item"  data-toggle="modal"  data-target="#modal-notification-auth{{comment.id}}" >ลบโพสต์</a>
+                        </div> 
+                         
+                      </div>{% endif%}
+            </div>
+          
+            <div class="card-header bg-transparent pb-5 ">
+            
+              <div class="text-center ">
+               {% if comment.image %}
+                   <img  class="imageshake img-fluid rounded" src="{{comment.image.url}}" alt="">
+              {% else %}
+                  
+              {% endif %} 
+            </div>
+          
+            <div class="card-body px-lg-8 py-lg-4">
+                  <h1 style="font-weight:bold;font-size:15px;"><a class="article-title"  >แสดงความคิดเห็นว่า: {{ comment.text|safe }}</a></h1>
+              
+   
+            </div>
+            {% if user.is_authenticated %}
+
+      <div class="text-muted text-start mt-0 mb-0">
+
+ 
+                     <div class="text-muted text-start mt-0 mb-0">
+                     {%if comment.liked.count == 0 %}
+                    <small class="align-items-start btn btn-link text-danger">
+                     <i class="far fa-heart fa-2x"></i> &nbsp;<span style="font-size:15px;">ยังไม่มีใครถูกใจสิ่งนี้</span>
+                     </small>
+
+                     {% else %}
+
+                    
+                      <a href="{% url 'post_detail' comment.post.pk %}"><small class="align-items-start btn btn-link text-danger">
+                     <i class="fas fa-heading fa-2x"></i>&nbsp;
+                     <span style="font-size:20px;">
+                     หัวเรื่อง :{{ comment.post.title}}
+                    
+                     </span>
+                     </small></a>
+                     
+
+                     {% endif%}
+
+
+          {% endif %}
+        </div>
+
+       
+      </div> </div>
+            </div>
+            {%endfor%}
+  </div>
+
+</div>
+           
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+   
+   
+
+
+
+  <!-- Argon Scripts -->
+  <!-- Core -->
+
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+
+
+</body>
+
+</html>

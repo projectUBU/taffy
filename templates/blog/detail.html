@@ -1,0 +1,379 @@
+
+{% load static %}
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Blog's Love Detail</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1557232134/toasty.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/taffy_app/taffy-app.css' %}" type="text/css">
+
+ 
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body class="bg-white">
+
+
+
+
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light "style="position: -webkit-sticky;  position: sticky; position: fixed; background: linear-gradient(87deg, #f3a4b5 0, #f3b4a4 100%) ">
+    <div class="container">
+    {%if user.is_authenticated%}
+      <a class="navbar-brand" href="{% url 'blog'  %}">
+    {% elif user.is_anonymous %}
+    
+     <a class="navbar-brand" id="bornborn"  data-toggle="modal" data-target="#modal-notification-anonymous" data-backdrop="static" data-keyboard="false">
+     <div>คุณสามารถเลือกอ่านได้ไม่เกิน <span id="time"></span> วินาที</div>
+
+     {% endif%}
+         <span style="font-size:24px"  ><i class="fas fa-arrow-left"></i>&nbsp;ดูเพิ่มเติมโพสต์ทาฟฟี่</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+            
+              <a href="/">
+                <img  src="{% static 'img/brand/redtaffy.png' %}">
+               
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+            
+          </div>
+        </div>
+     
+
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+             
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="{% url 'member_all'  %}"  data-toggle="tooltip" data-original-title="ค้นหาคู่ของคุณ">
+              <i class="fas fa-heart"></i>
+              <span class="nav-link-inner--text d-lg-none">ค้นหาคู่ของคุณ</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/dm/" data-toggle="tooltip" data-original-title="สนทนา">
+            <i class="fas fa-comment-alt"></i>
+              <span class="nav-link-inner--text d-lg-none">สนทนา</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="/profile/"  data-toggle="tooltip" data-original-title="แก้ไขโปรไพล์">
+               <i class="fas fa-user"></i>
+              <span class="nav-link-inner--text d-lg-none">แก้ไขโปรไพล์</span>
+            </a>
+          </li>
+ {%endif%}
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+    
+  <!-- Main content -->
+  <div class="main-content">
+
+    <div class="header bg-gradient-pink py-8 py-lg-9  pt-lg-6">
+           <div class="container">
+        <div class="header-body text-center mb-4">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-4 col-md-0 px-5">
+            
+           
+            </div>
+            
+       
+          </div>
+        </div>
+      </div>
+ 
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2490 90" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-white" points="2490 0 2490 90 0 90"></polygon>
+        </svg>
+      </div>
+    </div>
+    
+     <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      
+      <!-- Table -->
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-8">
+        
+        {% for post in posts%}
+ 
+           
+          
+            <div class="card-header border-0">
+              
+             
+                <div class="media mb-0">
+                  <span class="avatar avatar-sm rounded-circle "  style="width:75px;height:75px;;">
+                     <img  class="imageshake"  alt="Image placeholder" src="{{ post.author.profile_image.url }}" style="width:65px;height:65px;object-fit:cover;" >
+               
+                  </span>
+            
+              
+               </ul>
+    
+            
+                <div class="col mb-0">
+                  
+               <a  href="{% url 'member_posts' post.author.username %}"> Written by <h1 class="h3 mb-2" style="font-size:20px; font-weight:bold">{{ post.author.username }} ,{{ post.author.gender }} </h1></a>
+               <h6 class="text-uppercase text-muted ls-4 mb-1" style="font-size:15px;">{{ post.date_posted|date:"d F  h:i:s A" }}</h6>
+            
+                </div> 
+               
+                {% if post.author == user%}
+        
+                          <div class="dropdown show">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <i class="fas fa-ellipsis-v fa-2x"></i>
+                        </a> 
+                       
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" x-placement="bottom-end" style="position: absolute; transform: translate3d(-160px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
+                          <a  class="dropdown-item" href='{% url 'post_update' post.pk %}'>แก้ไขโพสต์</a>
+                          <a class="dropdown-item"  data-toggle="modal"  data-target="#modal-notification-auth{{post.id}}" >ลบโพสต์</a>
+                        </div> 
+                         
+                      </div>{% endif%}
+            </div>
+          
+            <div class="card-header bg-transparent pb-5 ">
+            
+              <div class="text-center ">
+               {% if post.image %}
+                   <img  class="imageshake img-fluid rounded" src="{{post.image.url}}" alt="">
+              {% else %}
+                  
+              {% endif %} 
+            </div>
+          
+            <div class="card-body px-lg-8 py-lg-4">
+                  <h1 style="font-weight:bold;font-size:25px;text-align:center;"><a class="article-title"  >{{ post.title|safe }}</a></h1>
+                  
+                  {%if post.content%}
+
+              {{ post.content|safe }}
+                {% else %}
+
+                {%endif%}
+   
+            </div>
+            {% if user.is_authenticated %}
+
+      <div class="text-muted text-start mt-0 mb-0">
+
+  
+                     <div class="text-muted text-start mt-0 mb-0">
+        <!-- Like -->
+    {% if user.is_authenticated %}
+    <div class="text-center">
+  
+        
+    </div>
+    {% endif %}
+
+                     <small class="align-items-start btn btn-link text-danger">
+                <a id="like" style="cursor: pointer;" class="text-center" data-url="{% url 'like_api' post.id %}"><i
+                style="color: red" class="
+                like-icon
+                {% if user in post.liked.all %}
+                fas fa-heart fa-3x
+                {% else %}
+                far fa-heart fa-3x
+                {% endif %}
+                " id="like-icon"></i></a> &nbsp;<span id="likes_count" style="font-size:15px;">{{post.liked.count}}</span>
+                     <span style="font-size:7px;">ถูกใจ</span></small>
+
+
+
+                     <small class="align-items-e  nd  btn btn-link text-default" type="button" >
+                     <i class="fas fa-comment fa-3x"></i>
+
+                     <span style="font-size:15px;">{{comments.count}}</span><span style="font-size:7px;">ความคิดเห็น</span>
+                   
+                     </small></div>
+                        <br> 
+                        <button  type="submit"  class="btn btn-success btn-lg btn-block rounded-pill" data-toggle="modal" data-target="#exampleModal" style="position: sticky;bottom: 0;">สร้างความคิดเห็นคุณได้ที่นี้</button>  
+                  <br>  <hr>
+{% for comment in comments %}
+
+
+                <div class="media mb-0">
+                  <span class="avatar avatar-sm rounded-circle "  style="width:60px;height:60px;;">
+                     <img  class="imageshake"  alt="Image placeholder" src="{{ comment.author.profile_image.url }}" style="width:60x;height:60px;object-fit:cover;" >
+               
+                  </span>
+            
+
+                <div class="col mb-0">
+                  
+               <a  href="{% url 'member_posts' comment.author.username %}"> <h1 class="h3 mb-2" style="font-size:20px; font-weight:bold">{{ comment.author.username }} ,{{ comment.author.gender }} </h1></a>
+               <h6 class="text-uppercase text-muted ls-4 mb-1" style="font-size:15px;">{{ comment.created_date|date:"d F  h:i:s A" }}</h6>
+            
+                </div> 
+               
+                  {%if comment.author == user%}
+                          <div class="dropdown show">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" x-placement="bottom-end" style="position: absolute; transform: translate3d(-160px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
+                          
+                          <a class="dropdown-item"  href="{%url 'delete_comment' comment.id%}" data-toggle="modal"  data-target="#modal-notification-comment{{comment.id}}" >ลบการแสดงความคิดเห็น</a>
+                          
+                        </div>
+                      </div>
+                      {%endif %}
+
+             </div>
+            <div class="container right"
+          <h6 class="text-uppercase text-muted ls-4 mb-1" style="font-size:15px;">{{comment.text|safe}}</h6>
+          </div>
+          <hr>
+{% endfor %}
+     
+          {% endif %}
+    </div> 
+</div>
+    </div> 
+ {% endfor %}
+          
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">แสดงความคิดเห็น</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+             <form method="POST" enctype="multipart/form-data">
+                               {% csrf_token %} 
+                               <div class="content-section">
+                                  {{ form.media }}
+                                  {{ form|crispy }}
+
+
+                                 </div> 
+                    <div class="modal-footer" style="position: sticky;bottom: 0;" >
+                          
+                              <button  type="submit"  class="btn btn-danger btn-lg btn-block rounded-pill" >แสดงความคิดเห็น</button>
+                          </div>
+                        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  {%for post in posts%}
+    <div class="modal fade dialoged" style="position:fixed; overflow: auto;" id="modal-notification-auth{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="modal-notification-auth" aria-hidden="true">
+   
+      <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-danger">
+          <div class="modal-header">
+          <img  class="modal-title" id="modal-title-notification" src="{% static 'img/brand/whitetaffy.png' %}" width=150>
+        
+          </div>
+          <div class="modal-body">
+            <div class="py-3 text-center">
+              <i class="fas fa-trash-alt fa-4x"></i>
+              <h4 class="heading mt-4">ลบโพสต์</h4>
+              <p>หากคุณต้องการลบประสมการณ์กดปุ่มลบโพสต์ได้เลยแล้วมันจะหายไป</p>
+            </div>
+          </div>
+         
+          <div class="modal-footer">
+            <a href="{% url 'delete_post' post.id %}"><button  type="button" class="btn btn-white">ลบโพสต์</button></a>
+            <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+   {%endfor%}
+
+<!-- modal-delcoment -->
+   {%for comment in comments%}
+    <div class="modal fade dialoged" style="position:fixed; overflow: auto;" id="modal-notification-comment{{comment.id}}" tabindex="-1" role="dialog" aria-labelledby="modal-notification-auth" aria-hidden="true">
+   
+      <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-danger">
+          <div class="modal-header">
+          <img  class="modal-title" id="modal-title-notification" src="{% static 'img/brand/whitetaffy.png' %}" width=150>
+        
+          </div>
+          <div class="modal-body">
+            <div class="py-3 text-center">
+              <i class="fas fa-trash-alt fa-4x"></i>
+              <h4 class="heading mt-4">ลบการแสดงความคิดเห็น</h4>
+              <p>หากคุณต้องการ กดปุ่มลบการแสดงความคิดเห็นได้เลยแล้วมันจะหายไป</p>
+            </div>
+          </div>
+         
+          <div class="modal-footer">
+            <a href="{% url 'delete_comment' comment.id %}"><button  type="button" class="btn btn-white">ลบการแสดงความคิดเห็น</button></a>
+            <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+   {%endfor%}
+   <script src="{% static 'vendor/nouislider/distribute/nouislider.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+  <!-- Like APT JS -->
+  <script src="{% static 'js/main.js' %}"></script>
+ 
+
+</body>
+
+</html>

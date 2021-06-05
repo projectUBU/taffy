@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Taffy - Welcome to Taffy</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{% static 'vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{% static 'css/argon.css' %}" type="text/css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body class="bg-danger">
+  <!-- Navbar -->
+  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
+    <div class="container">
+
+
+      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
+    
+     
+    
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="main-content">
+  
+    <!-- Header -->
+    <div class="header bg-gradient-pink py-8 py-lg-6 pt-lg-6">
+      <div class="container">
+        <div class="header-body content-center mb-6">
+          <div class="row justify-content-center">
+          <div class="px-lg-4 py-lg-6">
+              <img src="{% static 'img/brand/whitetaffy.png' %}" width="300" >
+                  
+        </div>
+        <br>
+       
+       
+</div>
+          </div>
+        </div>
+      </div>
+      <div class="separator separator-bottom separator-skew zindex-100">
+        <svg x="0" y="0" viewBox="0 0 2580 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <polygon class="fill-danger" points="2580 0 2580 100 0 100"></polygon>
+        </svg>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container mt--12 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-8">
+          
+ 
+            <div class="px-lg-12 py-lg-2">
+                 
+
+         
+            <button  type="button" class="btn btn-outline-white btn-lg btn-block rounded-pill" data-toggle="modal"  data-target="#exampleModalCenter"  data-backdrop="static" data-keyboard="false" ><i class="fas fa-sign-in-alt"></i>Login</button>
+            <a href="/register/" type="button" class="btn btn-outline-dark btn-lg btn-block rounded-pill">Register</a>
+            <a href="{%url 'blog'%}" type="button" class="btn btn-white btn-lg btn-block rounded-pill" target="_blank" data-toggle="tooltip" data-original-title="ประสบการณ์ความรัก">ประสบการณ์ความรัก</a>
+             <a data-toggle="modal" data-target="#cal01" data-backdrop="static" data-keyboard="false" type="button"  class="btn btn-white  btn-lg btn-block rounded-pill"  target="_blank" data-toggle="tooltip" data-original-title="รายละเอียดเกี่ยวกับการจับคู่และการคำนวณให้ในระบบ" ><i class="fas fa-info-circle"></i>รายละเอียด</a>
+               <center>   
+                     {% if messages %}{% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <span class="alert-icon"><i class="fas fa-bell"></i></span>
+    <span class="alert-text"><strong>Success!</strong>{{ message }}</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+    {% endfor %}
+        
+        {% endif %}
+</center> 
+         
+        </div>
+          <!-- Button trigger modal -->
+
+
+
+        </div>
+
+        <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       <div class="modal-title col-6 collapse-brand" id="exampleModalCenterTitle">
+              
+                <img src="{% static 'img/brand/redtaffy.png' %}" width=100>
+             <a>Login</a>
+            </div>
+      
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form role="form"  method="POST">
+        {% csrf_token %}
+                <div class="form-group ">
+                
+                   
+                     {{ form.username|as_crispy_field}}
+                  </div>
+                
+                <div class="form-group ">
+                
+                     {{ form.password|as_crispy_field}}
+                  
+                </div>
+              <div class="modal-footer">
+        
+        <button  type="submit"  class="btn btn-danger btn-lg btn-block rounded-pill" >Login</button>
+      </div>
+      </form>
+    </div>
+  </div>
+
+
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- Modal -->
+<div class="modal fade" id="cal01" tabindex="0" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-longed" role="document">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-info-circle"></i>คำอธิบาย</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+             
+         
+
+        <strong>การหาคู่และการแสดงคู่ในระบบ</strong>
+      
+        <ul>
+        <li>ผู้ใช้งานจะต้องลงทะเบียนเข้าใช้งาน</li>
+        <li>ระบบจะเอาวันเกิดไปคำนวณคะแนนจาก ความเชื่อเรื่องดวงสมพงษ์ในประเทศไทย</li>
+        <li>ระบบเอาคะแนนมาจากโหราศาสตร์ ออนไลน์หลายแหล่งอ้างอิงที่น่าเชื่อถึอ</li>
+        </ul>
+        <strong>ตารางคะแนนจากดวงสมพงษ์</strong>
+         <ul>
+        <li>ประกอบไปด้วย กรู๊ปเลือด นักษัตร ราศี วันประจำวันเกิด</li>
+        </ul>
+        <strong>ตารางดวงสมพงษ์กรู๊ปเลือด</strong>
+        <img src="https://lh3.googleusercontent.com/nWVaOFzsckB6qE4B4EqCSBImrLdJh_9zvtZ_ma3S39oD4iASeChMbgX9uTQv-iwgObAZeoZvqDtQU5Cyj75yZM_PxiRdWEUMP8ridQYd0Fbm8psupROXmjiBVhGRnUbaE0ybiz-dH0UcsoV3C7sChsH1VAZDytuJRzpK7rje0TIQ07hlNqP4tj96UebwcfMR9HDAyxpTm_jZHDOM4_qBqKwhqpq-bryQpZQZJKuGML3_6MakeW7Umzi52-BmBGtLXddMErjM7G_CS4dXVWqtN-gxZLK3rOI9jkU8nqZVFbHP2gmZ0sJaGsi2jZQlGvAT7Lhi_GW8KFXRTb5nL9BZgdvi25DZov0demUHTxcZmTzU5_Cbeo3snFIdTHJrNuooqV4bQW8W-8VD9Q3dJIcREmBuv74Cd9PFO5WitYuKa6yc4crELCyaTLJE10GdTe29A3lfe75dUNt6qukxDrA3n4V2BIenrWwm6W8n-DvuEaY0ELuVj3Wpi-rMxZKJt9v6yRkHynVzfgrbvTjy78lQYZ5mU98F6qqWWAYrkfP5e3qXKVIxmHdl62V3EUh9FiM1siWQnKFH8oTzSGb-tTjPfgRNIDCvRv1Axh2_JXKfzVEapVjZMaEzk8-BlCaqIYg9EKgbhRFmpzsgm2vIqgpos1I5VAKy6NJl9Y2EHAzUIjGSBL1vy-l9tKPzLbXWmIqotLIQu4XT8zkFLkrbSHJeRcTlLg=w784-h213-no?authuser=0" style="width:100%;cursor:zoom-in"
+  onclick="document.getElementById('modal01').style.display='block'">
+
+ 
+        
+       
+      
+          <strong>ตารางดวงสมพงษ์นักษัตร </strong>
+                  <img src="https://lh3.googleusercontent.com/pw/ACtC-3dkfgOzk6LYbWFX2zzHHRT2repSgz1_lTSZ6llb3M4bY8NDHrZmy-cnVU4t25V1xRFG-HBxGbP6-jTA1Js3qH5cWHdYGZ6e3Cnr3YRuGvgelSZRxU-MV7J_AGQx4eZsN-cFSaQ2dOqyFBMQRq_qSqKBtg=w1425-h417-no?authuser=0" style="width:100%;cursor:zoom-in"
+  onclick="document.getElementById('modal02').style.display='block'">
+
+    
+          <strong>ตารางดวงสมพงษ์ราศี </strong>
+                  <img src="https://lh3.googleusercontent.com/pw/ACtC-3cnS8_iVdyzMe6mMg2TqUqm_6ntIGXZFikeLV91i-X-x5GKB8akIUyrEfFVdorgq1yS_75LrSCKd3_AZOqOJiGHMcd-TzR-_6Lds1pbgbnL3ZaWkPVowF3pVzA_4M-rVaBNtZMfSgd3YHAisf-kDIlbFQ=w1421-h419-no?authuser=0" style="width:100%;cursor:zoom-in"
+  onclick="document.getElementById('modal03').style.display='block'">
+
+
+           
+          <strong>ตารางดวงสมพงษ์วันประจำวันเกิด</strong>
+                  <img src="https://lh3.googleusercontent.com/pw/ACtC-3eMFMePaUikSrR44-Z_F5gP9d48SCGkGQTk0jd-kd1qCV5VvCJchReO-TNRXWzvvLcT0ulTseZZWFgaIaBXFIlTdGwYkEhpRantxiXq3iBps0RS3hwZXwq0lPmjFCo9h2jC5pblbfKwHPg5IkXibtKtig=w1356-h381-no?authuser=0" style="width:100%;cursor:zoom-in"
+  onclick="document.getElementById('modal04').style.display='block'">
+
+
+  </div>
+         <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+   
+    <div class="w3-modal-content w3-animate-zoom ">
+      <img src="https://lh3.googleusercontent.com/nWVaOFzsckB6qE4B4EqCSBImrLdJh_9zvtZ_ma3S39oD4iASeChMbgX9uTQv-iwgObAZeoZvqDtQU5Cyj75yZM_PxiRdWEUMP8ridQYd0Fbm8psupROXmjiBVhGRnUbaE0ybiz-dH0UcsoV3C7sChsH1VAZDytuJRzpK7rje0TIQ07hlNqP4tj96UebwcfMR9HDAyxpTm_jZHDOM4_qBqKwhqpq-bryQpZQZJKuGML3_6MakeW7Umzi52-BmBGtLXddMErjM7G_CS4dXVWqtN-gxZLK3rOI9jkU8nqZVFbHP2gmZ0sJaGsi2jZQlGvAT7Lhi_GW8KFXRTb5nL9BZgdvi25DZov0demUHTxcZmTzU5_Cbeo3snFIdTHJrNuooqV4bQW8W-8VD9Q3dJIcREmBuv74Cd9PFO5WitYuKa6yc4crELCyaTLJE10GdTe29A3lfe75dUNt6qukxDrA3n4V2BIenrWwm6W8n-DvuEaY0ELuVj3Wpi-rMxZKJt9v6yRkHynVzfgrbvTjy78lQYZ5mU98F6qqWWAYrkfP5e3qXKVIxmHdl62V3EUh9FiM1siWQnKFH8oTzSGb-tTjPfgRNIDCvRv1Axh2_JXKfzVEapVjZMaEzk8-BlCaqIYg9EKgbhRFmpzsgm2vIqgpos1I5VAKy6NJl9Y2EHAzUIjGSBL1vy-l9tKPzLbXWmIqotLIQu4XT8zkFLkrbSHJeRcTlLg=w784-h213-no?authuser=0" style="width:100%">
+    </div>
+  </div>
+  <div id="modal02" class="w3-modal" onclick="this.style.display='none'">
+    
+    <div class="w3-modal-content w3-animate-zoom">
+      <img src="https://lh3.googleusercontent.com/pw/ACtC-3dkfgOzk6LYbWFX2zzHHRT2repSgz1_lTSZ6llb3M4bY8NDHrZmy-cnVU4t25V1xRFG-HBxGbP6-jTA1Js3qH5cWHdYGZ6e3Cnr3YRuGvgelSZRxU-MV7J_AGQx4eZsN-cFSaQ2dOqyFBMQRq_qSqKBtg=w1425-h417-no?authuser=0" style="width:155%">
+    </div>
+  </div>
+    <div id="modal03" class="w3-modal" onclick="this.style.display='none'">
+    
+    <div class="w3-modal-content w3-animate-zoom">
+      <img src="https://lh3.googleusercontent.com/pw/ACtC-3cnS8_iVdyzMe6mMg2TqUqm_6ntIGXZFikeLV91i-X-x5GKB8akIUyrEfFVdorgq1yS_75LrSCKd3_AZOqOJiGHMcd-TzR-_6Lds1pbgbnL3ZaWkPVowF3pVzA_4M-rVaBNtZMfSgd3YHAisf-kDIlbFQ=w1421-h419-no?authuser=0" style="width:770" >
+    </div>
+  </div>
+    <div id="modal04" class="w3-modal" onclick="this.style.display='none'">
+    
+    <div class="w3-modal-content w3-animate-zoom">
+      <img src="https://lh3.googleusercontent.com/pw/ACtC-3eMFMePaUikSrR44-Z_F5gP9d48SCGkGQTk0jd-kd1qCV5VvCJchReO-TNRXWzvvLcT0ulTseZZWFgaIaBXFIlTdGwYkEhpRantxiXq3iBps0RS3hwZXwq0lPmjFCo9h2jC5pblbfKwHPg5IkXibtKtig=w1356-h381-no?authuser=0" style="width:770">
+    </div>
+  </div>
+</div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/js-cookie/js.cookie.js' %}"></script>
+  <script src="{% static 'vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+  <!-- Argon JS -->
+  <script src="{% static 'js/argon.js' %}"></script>
+
+
+
+</body>
+
+</html>
