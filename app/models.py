@@ -153,9 +153,9 @@ class Member(AbstractUser):
     gender = models.CharField(choices=GENDER, max_length=1, default='M')
     testes = models.CharField(
         choices=GENDER, max_length=1, default='M')  # sex of Testes
-    # profile_image = models.ImageField(upload_to='profile_pics') 
-    profile_image = models.ImageField(
-        default=random_image, upload_to='profile_pics')  # default='default.jpg', ทำไว้เผื่อ Auto dump data Command https://campus.campus-star.com/app/uploads/2018/04/TopLazyLoxy17.jpg
+    profile_image = models.ImageField(upload_to='profile_pics') 
+    # profile_image = models.ImageField(
+    #     default=random_image, upload_to='profile_pics')  # default='default.jpg', ทำไว้เผื่อ Auto dump data Command https://campus.campus-star.com/app/uploads/2018/04/TopLazyLoxy17.jpg
     # YYYY-MM-DD
     birthday = models.DateField(default=your_date, null=True, blank=True)
     bloodtype = models.ForeignKey(
