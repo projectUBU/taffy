@@ -9,26 +9,31 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+# Read SECRET_KEY from an environment variable
 import os
-# import django_heroku
-# django_heroku.settigns(locals(), staticfiles=False)
-# import dj_database_url
-# DATABASES = {}
+# SECRET_KEY = os.environ['SECRET_KEY']
+
+
+# import os
+# # import django_heroku
+# # django_heroku.settigns(locals(), staticfiles=False)
+# # import dj_database_url
+# # DATABASES = {}
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+# # Quick-start development settings - unsuitable for production
+# # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'w)k79&87z=n90%=qa^9&ch_tjng^28dm$n(8m-3lq3hvgdhmal'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = False
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # ALLOWED_HOSTS = ['taffydating.herokuapp.com']
 ALLOWED_HOSTS = ['*']
