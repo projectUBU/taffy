@@ -18,3 +18,4 @@ sqlparse==0.4.1
 virtualenv==20.4.6
 virtualenv-clone==0.5.4
 whitenoise==5.2.0
+openpyxl ==3.0.7
