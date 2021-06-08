@@ -552,7 +552,7 @@ function startTimer(duration, display) {
 }
 
 
-startTimer(5, 'time').then(function(){
+startTimer(60*5, 'time').then(function(){
   
   $('#bornborn').trigger('click'); 
   
@@ -588,26 +588,7 @@ $("#example{{post.id}}").click(function(e) {
 });
   </script>
  {% endfor %}
-  {%for post in posts%}
-<script>
-            fetch('http://localhost:8000/api-blog/comment/?format=json')
-                .then(response => {
-                    return response.json()
-                })
-                .then(data => {
-                    // Work with JSON data here
-                    console.log(data.length)
-                 
-                      
-                })
-                .catch(err => {
-                    // Do something for an error here
-                    console.log(err)
-                    console.log("ERROR")
-                })
-
-        </script>
- {% endfor %}
+ 
          
 </body>
 

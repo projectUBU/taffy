@@ -153,13 +153,13 @@ class Member(AbstractUser):
     gender = models.CharField(choices=GENDER, max_length=1, default='M')
     testes = models.CharField(
         choices=GENDER, max_length=1, default='M')  # sex of Testes
-    profile_image = models.ImageField(upload_to='profile_pics') 
-    # profile_image = models.ImageField(
-    #     default=random_image, upload_to='profile_pics')  # default='default.jpg', ทำไว้เผื่อ Auto dump data Command https://campus.campus-star.com/app/uploads/2018/04/TopLazyLoxy17.jpg
+    # profile_image = models.ImageField(upload_to='profile_pics') 
+    profile_image = models.ImageField(
+        default=random_image, upload_to='profile_pics')  # default='default.jpg', ทำไว้เผื่อ Auto dump data Command https://campus.campus-star.com/app/uploads/2018/04/TopLazyLoxy17.jpg
     # YYYY-MM-DD
-    birthday = models.DateField(default=your_date, null=True, blank=True)
+    birthday = models.DateField(default=your_date)
     bloodtype = models.ForeignKey(
-        BloodType, default=3, verbose_name="หมู่เลือด", null=True, blank=True, on_delete=models.CASCADE)
+        BloodType, default=3, verbose_name="หมู่เลือด", on_delete=models.CASCADE)
 
     def __str__(self):
         return f'ID:{self.id} ({self.username})'
@@ -373,7 +373,7 @@ class Match(models.Model):
     class Meta:
         unique_together = ('matcher_owner', 'matcher_excluded')
        
-        verbose_name = "เลือก:Match"
+        verbose_name = "ชอบ:Match"
 
     def __str__(self):
         return f'{self.matcher_owner}  {self.matcher_excluded}  {self.rating})'
@@ -389,7 +389,7 @@ class NoMatch(models.Model):
     class Meta:
         unique_together = ('nomatcher_owner', 'nomatcher_excluded')
        
-        verbose_name = "ไม่เลือก:NoMatch"
+        verbose_name = "ไม่ชอบ:NoMatch"
 
     def __str__(self):
         return f'{self.nomatcher_owner}  {self.nomatcher_excluded}  {self.rating})'
