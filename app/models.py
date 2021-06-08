@@ -11,7 +11,7 @@ from random import *
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.cache import cache
 import datetime
-
+from django_random_id_model import RandomIDModel
 
 class BloodType(models.Model):
 

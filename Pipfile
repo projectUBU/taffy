@@ -30,6 +30,7 @@ pydotplus = "*"
 django-widget-tweaks = "==1.4.8"
 python-memcached = "==1.59"
 Pillow = "*"
+django-random-id-model = "*"
 
 [dev-packages]
 autopep8 = "*"
