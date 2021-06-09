@@ -138,9 +138,9 @@ class ProfileView(LoginRequiredMixin,View):
    
     def get(self, request, *args, **kwargs):
        
-        self.member = self.models_class.objects.filter(id=self.request.user.id)
+        self.member = self.models_class.objects.filter(member__id=request.user.id)
         self.form = self.form_class(instance=self.request.user)
-        # print(self.form)
+        print(self.member)
         self.context = {'form': self.form,'member':self.member}
         return self.render(request)
 
@@ -173,7 +173,7 @@ class SettingsUpdateView(LoginRequiredMixin,View):
    
     def get(self, request, *args, **kwargs):
        
-        self.member = self.models_profile_class.objects.filter(id=self.request.user.id)
+        self.member = self.models_profile_class.objects.filter(member__id=self.request.user.id)
         self.form = self.form_class(instance=self.request.user)
         # print(self.form)
         self.context = {'form': self.form,'member':self.member}
