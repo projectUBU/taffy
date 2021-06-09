@@ -306,8 +306,8 @@ class GetRatingView(LoginRequiredMixin, View):
         own = list(self.models_class.objects.filter(id=request.user.id))
         member_excluded = self.models_class.objects.exclude(id=request.user.id)
 
-        own_id = list(self.models_class.objects.filter(member__id=request.user.id).values_list('id', flat=True))
-        member_excluded_id = sorted(list(self.models_class.objects.exclude(id=request.user.id).values_list('id', flat=True)))
+        own_id = list(self.models_class.objects.filter(member__id=request.user.id).values_list('member__id', flat=True))
+        member_excluded_id = sorted(list(self.models_class.objects.exclude(member__id=request.user.id).values_list('member__id', flat=True)))
         nomatch_id = sorted(list(self.models_class_nomatch.objects.filter(nomatcher_owner=request.user.id).values_list('nomatcher_excluded_id', flat=True)))
         match_id = sorted(list(self.models_class_match.objects.filter(matcher_owner=request.user.id).values_list('matcher_excluded_id', flat=True)))
         rating = self.models_class_rating.objects.filter(member_owner=request.user.id)
@@ -319,13 +319,14 @@ class GetRatingView(LoginRequiredMixin, View):
         
         
         not_equal=[x for x in match_id + nomatch_id + member_excluded_id if x not in match_id and x not in nomatch_id or x not in member_excluded_id]
-
+        print(not_equal)
         
 
         for i in range(len(not_equal)):
             
-            owner_class=self.models_class.objects.get(member__id=own_id[0])
+            owner_class=self.models_class.objects.get(member__id=request.user.id)
             member_class=self.models_class.objects.get(member__id=not_equal[i])
+            print(member_class)
             if own_id[0] != member_class.member.id and owner_class.member.testes == member_class.member.gender and owner_class.member.gender ==  member_class.member.testes :
                 # print(f'_______{member_class}______')
                 rating_score =  (rasilist[owner_class.rasi.id-1][member_class.rasi.id-1] + bloodtypelist[owner_class.bloodtype.id-1][member_class.bloodtype.id-1] +
@@ -357,7 +358,7 @@ class GetRatingView(LoginRequiredMixin, View):
                             
                         else:
                             print(old[i].member_excluded.member.username)
-                            # excluded_id = old[i].id
+                            excluded_id = old[i].id
                  
             
             # else:
@@ -439,7 +440,7 @@ class LikeView(LoginRequiredMixin,View):
             get_owner = get_object_or_404(self.models_member_class,id=request.user.id)
             get_member = get_object_or_404(self.models_member_class,pk=pk)
             rating_point = request.POST.get('point')
-            print(get_owner,get_member,rating_point)
+            print(pk)
             self.models_class(matcher_owner=get_owner,matcher_excluded=get_member,rating=rating_point).save()
             self.models_rating_class.objects.filter(member_excluded__member_id=pk).delete()
             return redirect(self.success_url)

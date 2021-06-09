@@ -41,8 +41,8 @@ def user_list(request, pk=None):
             print(u)
         else:
             
-            matcher = list(Match.objects.filter(matcher_owner=request.user.id).values_list('matcher_excluded_id', flat=True))
-            find_qual =  list(Match.objects.filter(matcher_excluded=request.user.id).values_list('matcher_owner_id', flat=True))
+            matcher = list(Match.objects.filter(matcher_owner=request.user.id).values_list('matcher_excluded__id', flat=True))
+            find_qual =  list(Match.objects.filter(matcher_excluded=request.user.id).values_list('matcher_owner__id', flat=True))
             
             qual = [x for x in matcher if x  in  find_qual and  x  in matcher]
             not_equal=[x for x in matcher + find_qual if x not in matcher or x not in find_qual ]
@@ -145,6 +145,7 @@ def rate_view(request):
     if request.method == 'POST':
         m = request.user.id
         mx_id = request.POST.get('mx_id')
+        print(m,mx_id)
         owner = get_object_or_404(Member,id=m)
         rejecter = get_object_or_404(Member,id=mx_id)
         val = request.POST.get('val')
@@ -154,8 +155,8 @@ def rate_view(request):
             k.save()
             get_score = Profile.objects.filter(member__id=mx_id).first()
             result = list(Handler.objects.filter(rejected_m__id=mx_id).values_list('reviewe_value', flat=True))
-            new_s = get_score.profile_score + (sum(result)*len(result)/(5*len(result)))
-            print(new_s)
+            new_s = (get_score.profile_score + sum(result)*len(result))/(len(result))
+            print(result,new_s)
             score_new_profile = Profile.objects.filter(member__id=mx_id).update(profile_score=new_s)
          
         except:

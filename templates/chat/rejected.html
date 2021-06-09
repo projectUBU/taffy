@@ -44,7 +44,7 @@
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light "style="position: -webkit-sticky;  position: sticky; position: fixed; background: white; )">
     <div class="container">
       <a class="navbar-brand" href="{% url 'chat' request.user.id object.member.id%}">
-         <span style="font-size:24px;color:red;"> <i class="fas fa-arrow-left"></i>&nbsp;ปฏิเสทและรีวิวเนื้อคู่</span>
+         <span style="font-size:24px;color:red;"> <i class="fas fa-arrow-left"></i>&nbsp;ปฏิเสธและรีวิวเนื้อคู่</span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
       
@@ -151,7 +151,7 @@
                    <center> <h3><strong>รีวิวเนื้อคู่ของคุณ &nbsp;<i class="fas fa-question-circle" data-toggle="modal"  data-target="#QuestionCenter"></i></strong></h3><center>
                    <span id="confirm-box" ></span>
                    <br><br>
-                    <form class="rate-form" action="" method="POST" id="{{object.id}}" name="{{request.user.id}}">
+                    <form class="rate-form" action="" method="POST" id="{{object.member.id}}" name="{{request.user.id}}">
                     {% csrf_token %}
                     <button type="submit" class="fa fa-heart fa-3x my-btn " id="first"></button>
                     <button type="submit" class="fa fa-heart fa-3x my-btn " id="second"></button>
@@ -420,20 +420,20 @@
       <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
         <div class="modal-content bg-gradient-danger">
           <div class="modal-header">
-            <h6 class="modal-title" id="modal-title-notification">คุณมั่นใจหรอว่าจะปฏิเสท <strong>{{object.member.username}}</strong></h6>   
+            <h6 class="modal-title" id="modal-title-notification">คุณมั่นใจหรอว่าจะปฏิเสธ <strong>{{object.member.username}}</strong></h6>   
            
           </div>
           <div class="modal-body">
             <div class="py-3 text-center">
               <i class="ni ni-bell-55 ni-3x"></i>
            
-              <p>ความเหมาะสมของคุณ กับ <center><br><h2 style=color:white;""> <strong>{{object.member.username}} "{{score.rating}}" คะแนน</strong></h2></center><br>  <p>คุณจะปฏิเสทได้ลงคอ???</p></p>
+              <p>ความเหมาะสมของคุณ กับ <center><br><h2 style=color:white;""> <strong>{{object.member.username}} "{{score.rating}}" คะแนน</strong></h2></center><br>  <p>คุณจะปฏิเสธได้ลงคอ???</p></p>
             </div>
           </div>
           <div class="modal-footer">
           <form method="POST" action="{% url 'del_rejected' object.member.id%}">
               {% csrf_token %}
-            <button type="submit" class="btn btn-white" >ปฏิเสท {{object.member.username}}</button>
+            <button type="submit" class="btn btn-white" >ปฏิเสธ {{object.member.username}}</button>
             </form>
             <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
           </div>
@@ -452,7 +452,7 @@
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                <p style="font-weight:bold;font-size:18px">คุณสามารถรีวิวเนื้อคู่ของคุณได้เสมอ ไม่จำต้องปฏิเสทเนื้อคู่ของคุณก็ได้ โดยคะแนนรีวิว นั้นถูกเก็บคะแนนไปคำนวณให้กับ {{object.member.username}} แค่ครั้งแรกของการกดเท่านั้น ถ้ากดเปลี่ยนคะแนนหรือ กดเป็นครั้งที่สองหรือมากกว่านั้นระบบจะทำการ Updated คะแนนให้ แต่จะไม่ไปคำนวนในครั้งนี้ จะไปคำนวนในครั้งถัดไปเมื่อมีคนอื่นมีรีวิว </p>
+                                <p style="font-weight:bold;font-size:18px">คุณสามารถรีวิวเนื้อคู่ของคุณได้เสมอ ไม่จำต้องปฏิเสธเนื้อคู่ของคุณก็ได้ โดยคะแนนรีวิว นั้นถูกเก็บคะแนนไปคำนวณให้กับ {{object.member.username}} แค่ครั้งแรกของการกดเท่านั้น ถ้ากดเปลี่ยนคะแนนหรือ กดเป็นครั้งที่สองหรือมากกว่านั้นระบบจะทำการ Updated คะแนนให้ แต่จะไม่ไปคำนวนในครั้งนี้ จะไปคำนวนในครั้งถัดไปเมื่อมีคนอื่นมีรีวิว </p>
                                     <center> <h2 style="font-weight:bold;font-size:18px;color:red;">โปรดระวังในการรีวิวเพราะคะแนนนั้นส่งต่อ {{object.member.username}} ทั้งระบบ</h2></center>                                      
                                     
                                   </div>

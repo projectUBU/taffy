@@ -158,7 +158,7 @@
                     </span>
                       </div></a>
                     <div class='multi-action3'>
-                    <button class='action-button3'><span>{{key.ratingPoint|floatformat:2}}</span></button>
+                    <button class='action-button3'><span>{{key.ratingPoint|floatformat:1}}</span></button>
                       </div>
                      <form method="POST" action="{% url 'nope' key.member_excluded_id %}">
                      <div  class='multi-action2'>
@@ -265,10 +265,10 @@
                     </span>
                       </div></a>
                     <div class='multi-action3'>
-                    <button class='action-button3'><span>{{key.ratingPoint|floatformat:2}}</span></button>
+                    <button class='action-button3'><span>{{key.ratingPoint|floatformat:1}}</span></button>
                       </div>
 
-                      <form method="POST" action="{% url 'nope' key.member_excluded_id %}">
+                      <form method="POST" action="{% url 'nope' key.member_excluded.member.id %}">
                      <div  class='multi-action2'>
                       {% csrf_token %}
                       <input type="hidden" name="point" value="{{key.ratingPoint}}">
@@ -276,7 +276,7 @@
                       </div>
                     </form>
                      
-                      <form method="POST" action="{% url 'like' key.member_excluded_id %}">
+                      <form method="POST" action="{% url 'like' key.member_excluded.member.id %}">
                     <div  class='multi-action'>
                     
                      {% csrf_token %}
@@ -370,16 +370,21 @@
                                       <div class="col">
                                         <div class="card-profile-stats d-flex justify-content-center">
                                           <div>
-                                            <span class="heading">  <a href="#" class="btn btn btn-default">Nope</a></span>
-                                          
+                                          <form method="POST" action="{% url 'nope' key.member_excluded.member.id %}">
+                                              {% csrf_token %}
+                                          <button type="submit" class="btn btn btn-default">Nope</button>
+                                          </form>
                                           </div>
                                           <div>
-                                            <span class="heading">{{key.ratingPoint|floatformat:2}}</span>
+                                           <span class="heading">{{key.ratingPoint|floatformat:1}}</span>
+                                         
                                             <span class="description">Rating Score</span>
                                           </div>
                                           <div>
-                                            <span class="heading"><a href="#" class="btn btn btn-info  ">Like</a></span>
-                                          
+                                             <form method="POST" action="{% url 'like' key.member_excluded.member.id %}">
+                                             {% csrf_token %}
+                                              <button type="submit" class="btn btn btn-danger">Like</button>
+                                          </form>
                                           </div>
                                         </div>
                                       </div>
@@ -481,7 +486,7 @@
                                           
                                           </div>
                                           <div>
-                                            <span class="heading">{{key.ratingPoint|floatformat:2}}</span>
+                                            <span class="heading">{{key.ratingPoint|floatformat:1}}</span>
                                             <span class="description">Rating Score</span>
                                           </div>
                                           <div>
