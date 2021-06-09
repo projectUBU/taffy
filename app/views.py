@@ -319,20 +319,20 @@ class GetRatingView(LoginRequiredMixin, View):
         
         
         not_equal=[x for x in match_id + nomatch_id + member_excluded_id if x not in match_id and x not in nomatch_id or x not in member_excluded_id]
-        print(not_equal)
+        print(own_id)
         
 
         for i in range(len(not_equal)):
             
             owner_class=self.models_class.objects.get(member__id=request.user.id)
             member_class=self.models_class.objects.get(member__id=not_equal[i])
-            print(member_class)
-            if own_id[0] != member_class.member.id and owner_class.member.testes == member_class.member.gender and owner_class.member.gender ==  member_class.member.testes :
-                # print(f'_______{member_class}______')
+            # print(owner_class.member.testes ,member_class.member.gender)
+            if owner_class.member.id != member_class.member.id and owner_class.member.testes == member_class.member.gender and owner_class.member.gender ==  member_class.member.testes :
+                # print(f'_______{member_class.member.gender}______')
                 rating_score =  (rasilist[owner_class.rasi.id-1][member_class.rasi.id-1] + bloodtypelist[owner_class.bloodtype.id-1][member_class.bloodtype.id-1] +
                                 daysofweeklist[owner_class.daysofweek.id-1][member_class.daysofweek.id -
                                                                     1] + naksuslist[owner_class.naksus.id-1][member_class.naksus.id-1])*member_class.profile_score
-               
+                # print(f'_______{rating_score}______')
                 member_excluded_id = member_class.member.id
                 try:
                 
@@ -357,17 +357,17 @@ class GetRatingView(LoginRequiredMixin, View):
                             # print(f'__________{old[i].member_excluded.member.username}____')
                             
                         else:
-                            print(old[i].member_excluded.member.username)
+                            # print(old[i].member_excluded.member.username)
                             excluded_id = old[i].id
                  
             
-            # else:
-            #     old = self.models_class_rating.objects.filter(member_owner_id=request.user.id).order_by("-ratingPoint")
-            #     print(f'__________{old}___________')       
+            else:
+                member_class=self.models_class.objects.get(member__id=not_equal[i])
+                print(member_class.member.gender)
 
      
        
-        rating_alls = self.models_class_rating.objects.filter(member_owner_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes).order_by("-ratingPoint")
+        rating_alls = self.models_class_rating.objects.filter(member_owner__member_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes).order_by("-ratingPoint")
         print(f'_____{len(rating_alls)}________')
         age_min = self.models_class.objects.all().aggregate(Min('age'))['age__min']
         age_max = self.models_class.objects.all().aggregate(Max('age'))['age__max']

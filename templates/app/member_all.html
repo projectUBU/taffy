@@ -294,7 +294,7 @@
                               <div class="contentt">
                                 <h1 style='font-size: 27px;color:white'>ID:{{key.member_excluded.member.id}} {{key.member_excluded.member.username}},{{key.member_excluded.age}}</h1>
                                 <small style='color:white'>ความสนใจ: {{key.member_excluded.member.testes}}-{{key.member_excluded.member.gender}} <span style='color:white' class='fa fa-heart'></span></small>
-                                {%if key.member_excluded.member.description == None%}<p>...on rating_all...</p>{%endif%}
+                                {%if key.member_excluded.member.description == None%}<p>....</p>{%endif%}
                                 {%if key.member_excluded.member.description != None%}<p>{{key.member_excluded.member.description}}</p>{%endif%}
                               
                               </div>
