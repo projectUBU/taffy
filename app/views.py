@@ -347,13 +347,13 @@ class GetRatingView(LoginRequiredMixin, View):
                     # print("____________________________")
                     
                     
-                    old = self.models_class_rating.objects.filter(member_owner_id=request.user.id).order_by("-ratingPoint")
-                    rating_all_get = self.models_class_rating.objects.filter(member_owner_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes).order_by("-ratingPoint")
+                    old = self.models_class_rating.objects.filter(member_owner__member_id=request.user.id).order_by("-ratingPoint")
+                    rating_all_get = self.models_class_rating.objects.filter(member_owner__member_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes).order_by("-ratingPoint")
                     # print(f'_____rating all is {rating_all_get}')
 
                     for i in range(len(old)):
                         if old[i]  in rating_all_get:
-                            self.models_class_rating.objects.filter(member_excluded_id=member_class.member.id).update(ratingPoint=rating_score)
+                            self.models_class_rating.objects.filter(member_excluded__member_id=member_class.member.id).update(ratingPoint=rating_score)
                             # print(f'__________{old[i].member_excluded.member.username}____')
                             
                         else:
@@ -399,17 +399,17 @@ class GetRatingView(LoginRequiredMixin, View):
             if anode is None and cathode is not None:
                 cathode = -1
                 filter_ages = self.models_class_rating.objects.filter(
-                    member_excluded__age__range=(filter_age1, filter_age2)) & self.models_class_rating.objects.filter(member_owner_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes) & self.models_class_rating.objects.filter(ratingPoint__lte=cathode).order_by("ratingPoint")
+                    member_excluded__age__range=(filter_age1, filter_age2)) & self.models_class_rating.objects.filter(member_owner__member_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes) & self.models_class_rating.objects.filter(ratingPoint__lte=cathode).order_by("ratingPoint")
                 # print(f'__________{anode}________/{cathode}_______')
 
             elif anode is not None and cathode is None:
                 anode = 1
                 filter_ages = self.models_class_rating.objects.filter(
-                    member_excluded__age__range=(filter_age1, filter_age2)) & self.models_class_rating.objects.filter(member_owner_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes) & self.models_class_rating.objects.filter(ratingPoint__gte=anode).order_by("-ratingPoint")
+                    member_excluded__age__range=(filter_age1, filter_age2)) & self.models_class_rating.objects.filter(member_owner__member_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes) & self.models_class_rating.objects.filter(ratingPoint__gte=anode).order_by("-ratingPoint")
                 # print(f'__________{anode}________/{cathode}_______')
             else:
                 filter_ages = self.models_class_rating.objects.filter(
-                    member_excluded__age__range=(filter_age1, filter_age2)).order_by("-ratingPoint") & self.models_class_rating.objects.filter(member_owner_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes)
+                    member_excluded__age__range=(filter_age1, filter_age2)).order_by("-ratingPoint") & self.models_class_rating.objects.filter(member_owner__member_id=request.user.id,member_excluded__member__testes=request.user.gender,member_excluded__member__gender=request.user.testes)
     
             context = {
             "filter_ages": filter_ages,
