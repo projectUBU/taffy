@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 # Read SECRET_KEY from an environment variable
 # Import to serve staticfiles correctly
 import os
-# import django_heroku
+import django_heroku
 import dj_database_url
 from decouple import config
 # SECRET_KEY = os.environ['SECRET_KEY']
@@ -183,7 +183,7 @@ USER_ONLINE_TIMEOUT = 300
 # their last seen is removed from the cache
 USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 
-django_heroku.settings(locals())
+
 # Debugging in heroku live
 LOGGING = {
     'version': 1,
@@ -233,3 +233,5 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Heroku logs
 # heroku logs --tail
+
+django_heroku.settings(locals())
