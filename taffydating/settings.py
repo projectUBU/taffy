@@ -15,6 +15,10 @@ import os
 # import django_heroku
 import dj_database_url
 from decouple import config
+# At the top of the settings
+import cloudinary
+import cloudinary_storage
+
 # SECRET_KEY = os.environ['SECRET_KEY']
 
 
@@ -33,7 +37,7 @@ SECRET_KEY = 'w)k79&87z=n90%=qa^9&ch_tjng^28dm$n(8m-3lq3hvgdhmal'
 # DEBUG = False
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['taffydating.herokuapp.com','127.0.0.1:8000']
+ALLOWED_HOSTS = ['taffydating.herokuapp.com','127.0.0.1']
 
 # Application definition
 
@@ -51,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
     
 ]
 
@@ -150,8 +156,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 # Media Files
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Crispy Settings
