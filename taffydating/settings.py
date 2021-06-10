@@ -33,8 +33,7 @@ SECRET_KEY = 'w)k79&87z=n90%=qa^9&ch_tjng^28dm$n(8m-3lq3hvgdhmal'
 # DEBUG = False
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-# ALLOWED_HOSTS = ['taffydating.herokuapp.com']
-ALLOWED_HOSTS = ['https://taffydating.herokuapp.com']
+ALLOWED_HOSTS = ['taffydating.herokuapp.com','127.0.0.1:8000']
 
 # Application definition
 
