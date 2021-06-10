@@ -126,10 +126,10 @@ def random_image():
         for m in mm:
             # print(m.username)
             if m.gender == "M":
-                dir = os.path.join(settings.BASE_DIR,'media/male')
+                dir = os.path.join(settings.BASE_DIR,'https://cloudinary.com/console/c-34f9458801f0ee23227e10d452f66a/media_library/folders/785d85bfb4e8c7c85d714dc89303c18d')
                 # print(dir,f'____{m.username}___________')
             if m.gender == "F":
-                dir = os.path.join(settings.BASE_DIR, 'media/female')
+                dir = os.path.join(settings.BASE_DIR, 'https://cloudinary.com/console/c-34f9458801f0ee23227e10d452f66a/media_library/folders/e709610a4cc86097105b4f19d43f8eeb')
                
             files = os.listdir(dir)
             images = [file for file in files if os.path.isfile(os.path.join(dir, file))]
