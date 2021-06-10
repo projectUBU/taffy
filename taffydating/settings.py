@@ -167,7 +167,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Authentication Settings
 
 LOGIN_REDIRECT_URL = 'member_all'
-LOGIN_URL = 'wellcome'
+LOGIN_URL = 'login'
 
 # Email Settings
 
