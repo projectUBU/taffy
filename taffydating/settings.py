@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 # Read SECRET_KEY from an environment variable
 # Import to serve staticfiles correctly
 import os
-import django_heroku
+# import django_heroku
 import dj_database_url
 from decouple import config
 # SECRET_KEY = os.environ['SECRET_KEY']
@@ -34,7 +34,7 @@ SECRET_KEY = 'w)k79&87z=n90%=qa^9&ch_tjng^28dm$n(8m-3lq3hvgdhmal'
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # ALLOWED_HOSTS = ['taffydating.herokuapp.com']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://taffydating.herokuapp.com']
 
 # Application definition
 
@@ -200,4 +200,4 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Heroku logs
 # heroku logs --tail
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
