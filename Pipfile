@@ -32,6 +32,7 @@ python-memcached = "==1.59"
 Pillow = "*"
 django-random-id-model = "*"
 python-decouple = "*"
+django-cloudinary-storage = "*"
 
 [dev-packages]
 autopep8 = "*"
